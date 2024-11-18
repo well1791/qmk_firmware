@@ -88,39 +88,40 @@ const uint16_t PROGMEM al_v[] = {MT(MOD_LGUI, KC_H), KC_G, COMBO_END};
 const uint16_t PROGMEM al_w[] = {MT(MOD_LGUI, KC_H), MT(MOD_LSFT, KC_A), COMBO_END};
 const uint16_t PROGMEM al_q[] = {MT(MOD_LALT, KC_O), LT(_FF, KC_I), COMBO_END};
 const uint16_t PROGMEM al_j[] = {MT(MOD_LALT, KC_O), KC_G, COMBO_END};
-const uint16_t PROGMEM al_b_l[] = {MT(MOD_LCTL, KC_E), LT(_NA_L, KC_U), COMBO_END};
-const uint16_t PROGMEM al_b_r[] = {LT(_NA_R, KC_U), MT(MOD_LCTL, KC_E), COMBO_END};
-const uint16_t PROGMEM al_k_l[] = {LT(_NA_L, KC_U), MT(MOD_LSFT, KC_A), COMBO_END};
-const uint16_t PROGMEM al_k_r[] = {LT(_NA_R, KC_U), MT(MOD_LSFT, KC_A), COMBO_END};
-const uint16_t PROGMEM al_x_l[] = {MT(MOD_LGUI, KC_H), LT(_NA_L, KC_U), COMBO_END};
-const uint16_t PROGMEM al_x_r[] = {LT(_NA_R, KC_U), MT(MOD_LGUI, KC_H), COMBO_END};
-const uint16_t PROGMEM al_z_l[] = {LT(_NA_L, KC_U), MT(MOD_LALT, KC_O), COMBO_END};
-const uint16_t PROGMEM al_z_r[] = {LT(_NA_R, KC_U), MT(MOD_LALT, KC_O), COMBO_END};
+
+const uint16_t PROGMEM al_b_l[] = {LT(_NA_L, KC_M), MT(MOD_LCTL, KC_E), COMBO_END};
+const uint16_t PROGMEM al_b_r[] = {LT(_NA_R, KC_M), MT(MOD_LCTL, KC_E), COMBO_END};
+const uint16_t PROGMEM al_k_l[] = {LT(_NA_L, KC_M), MT(MOD_LSFT, KC_A), COMBO_END};
+const uint16_t PROGMEM al_k_r[] = {LT(_NA_R, KC_M), MT(MOD_LSFT, KC_A), COMBO_END};
+const uint16_t PROGMEM al_x_l[] = {LT(_NA_L, KC_M), MT(MOD_LGUI, KC_H), COMBO_END};
+const uint16_t PROGMEM al_x_r[] = {LT(_NA_R, KC_M), MT(MOD_LGUI, KC_H), COMBO_END};
+const uint16_t PROGMEM al_z_l[] = {LT(_NA_L, KC_M), MT(MOD_LALT, KC_O), COMBO_END};
+const uint16_t PROGMEM al_z_r[] = {LT(_NA_R, KC_M), MT(MOD_LALT, KC_O), COMBO_END};
 
 const uint16_t PROGMEM al_spc[] = {MT(MOD_LCTL, KC_E), LT(_FF,KC_I), MT(MOD_LSFT, KC_A), COMBO_END};
 const uint16_t PROGMEM al_esc[] = {MT(MOD_LGUI, KC_H), LT(_NS, KC_U), MT(MOD_LALT, KC_O), COMBO_END};
 const uint16_t PROGMEM al_ret[] = {MT(MOD_LGUI, KC_H), LT(_NS, KC_U), MT(MOD_LSFT, KC_A), COMBO_END};
 const uint16_t PROGMEM al_bspc[] = {MT(MOD_LCTL, KC_E), LT(_FF, KC_I), MT(MOD_LALT, KC_O), COMBO_END};
-const uint16_t PROGMEM al_tab_l[] = {LT(_NA_L, KC_U), MT(MOD_LALT, KC_O), LT(_NS, KC_U), COMBO_END};
-const uint16_t PROGMEM al_tab_r[] = {LT(_NA_R, KC_U), MT(MOD_LALT, KC_O), LT(_NS, KC_U), COMBO_END};
+const uint16_t PROGMEM al_tab_l[] = {LT(_NA_L, KC_M), MT(MOD_LALT, KC_O), LT(_NS, KC_U), COMBO_END};
+const uint16_t PROGMEM al_tab_r[] = {LT(_NA_R, KC_M), MT(MOD_LALT, KC_O), LT(_NS, KC_U), COMBO_END};
 const uint16_t PROGMEM al_caps[] = {MT(MOD_LSFT, KC_A), LT(_FF, KC_I), MT(MOD_LGUI, KC_H), COMBO_END};
 
 const uint16_t PROGMEM al_osm_ctl[] = {MT(MOD_LGUI, KC_H), MT(MOD_LCTL, KC_E), COMBO_END};
 const uint16_t PROGMEM al_osm_alt[] = {LT(_NS, KC_U), LT(_FF, KC_I), COMBO_END};
 const uint16_t PROGMEM al_osm_sft[] = {MT(MOD_LALT, KC_O), MT(MOD_LSFT, KC_A), COMBO_END};
-const uint16_t PROGMEM al_osm_gui_l[] = {KC_G, LT(_NA_L, KC_U), COMBO_END};
-const uint16_t PROGMEM al_osm_gui_r[] = {KC_G, LT(_NA_R, KC_U), COMBO_END};
+const uint16_t PROGMEM al_osm_gui_l[] = {KC_G, LT(_NA_L, KC_M), COMBO_END};
+const uint16_t PROGMEM al_osm_gui_r[] = {KC_G, LT(_NA_R, KC_M), COMBO_END};
 const uint16_t PROGMEM al_osm_meh[] = {MT(MOD_LCTL, KC_E), LT(_NS, KC_U), MT(MOD_LALT, KC_O), COMBO_END};
 
 const uint16_t PROGMEM al_osl_ns[] = {MT(MOD_LCTL, KC_E), LT(_NS, KC_U), MT(MOD_LSFT, KC_A), COMBO_END};
 const uint16_t PROGMEM al_osl_ff[] = {MT(MOD_LGUI, KC_H), MT(MOD_LALT, KC_O), KC_G, COMBO_END};
 const uint16_t PROGMEM al_osl_me[] = {LT(_NS, KC_U), MT(MOD_LALT, KC_O), KC_G, COMBO_END};
-const uint16_t PROGMEM al_osl_di_l[] = {LT(_FF, KC_I), MT(MOD_LSFT, KC_A), LT(_NA_L, KC_U), COMBO_END};
-const uint16_t PROGMEM al_osl_di_r[] = {LT(_NA_R, KC_U), MT(MOD_LSFT, KC_A), LT(_FF, KC_I), COMBO_END};
-const uint16_t PROGMEM al_osl_mo_l[] = {LT(_NA_L, KC_U), MT(MOD_LSFT, KC_A), LT(_NS, KC_U), COMBO_END};
-const uint16_t PROGMEM al_osl_mo_r[] = {LT(_NA_R, KC_U), MT(MOD_LSFT, KC_A), LT(_NS, KC_U), COMBO_END};
-const uint16_t PROGMEM al_osl_go_l[] = {MT(MOD_LCTL, KC_E), MT(MOD_LSFT, KC_A), LT(_NA_L, KC_U), COMBO_END};
-const uint16_t PROGMEM al_osl_go_r[] = {LT(_NA_R, KC_U), MT(MOD_LSFT, KC_A), MT(MOD_LCTL, KC_E), COMBO_END};
+const uint16_t PROGMEM al_osl_di_l[] = {LT(_FF, KC_I), MT(MOD_LSFT, KC_A), LT(_NA_L, KC_M), COMBO_END};
+const uint16_t PROGMEM al_osl_di_r[] = {LT(_NA_R, KC_M), MT(MOD_LSFT, KC_A), LT(_FF, KC_I), COMBO_END};
+const uint16_t PROGMEM al_osl_mo_l[] = {LT(_NA_L, KC_M), MT(MOD_LSFT, KC_A), LT(_NS, KC_U), COMBO_END};
+const uint16_t PROGMEM al_osl_mo_r[] = {LT(_NA_R, KC_M), MT(MOD_LSFT, KC_A), LT(_NS, KC_U), COMBO_END};
+const uint16_t PROGMEM al_osl_go_l[] = {MT(MOD_LCTL, KC_E), MT(MOD_LSFT, KC_A), LT(_NA_L, KC_M), COMBO_END};
+const uint16_t PROGMEM al_osl_go_r[] = {LT(_NA_R, KC_M), MT(MOD_LSFT, KC_A), MT(MOD_LCTL, KC_E), COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(na_spc, KC_SPACE),
@@ -223,7 +224,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_AL] = LAYOUT_split_3x5_3(
                 _______,            _______,       _______,            _______, _______,          _______,            _______,       _______,            _______,         _______,
                    KC_G, MT(MOD_LALT, KC_O), LT(_NS, KC_U), MT(MOD_LGUI, KC_H), _______,          _______, MT(MOD_LGUI, KC_H), LT(_NS, KC_U), MT(MOD_LALT, KC_O),            KC_G,
-        LT(_NA_R, KC_M), MT(MOD_LSFT, KC_S), LT(_FF, KC_I), MT(MOD_LCTL, KC_E), _______,          _______, MT(MOD_LCTL, KC_E), LT(_FF, KC_I), MT(MOD_LSFT, KC_S), LT(_NA_L, KC_M),
+        LT(_NA_R, KC_M), MT(MOD_LSFT, KC_A), LT(_FF, KC_I), MT(MOD_LCTL, KC_E), _______,          _______, MT(MOD_LCTL, KC_E), LT(_FF, KC_I), MT(MOD_LSFT, KC_A), LT(_NA_L, KC_M),
                                                    _______,            _______, _______,          _______,            _______,       _______
     ),
 
