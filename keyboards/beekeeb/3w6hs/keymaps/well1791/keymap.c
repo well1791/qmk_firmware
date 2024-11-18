@@ -252,7 +252,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NA_R] = LAYOUT_split_3x5_3(
           _______,         _______, _______,         _______, _______,          _______, _______, _______,      _______,  _______,
-        TO(_NA_R), LALT_T(KC_COPY), KC_UNDO, LGUI_T(KC_PGUP), _______,          _______,  KC_TAB,   KC_UP, KC_BACKSPACE,  TO(_AL),
+        TO(_NA_L), LALT_T(KC_COPY), KC_UNDO, LGUI_T(KC_PGUP), _______,          _______,  KC_TAB,   KC_UP, KC_BACKSPACE,  TO(_AL),
           TO(_AL), LSFT_T(KC_PSTE), KC_UNDO, LCTL_T(KC_PGDN), _______,          _______, KC_LEFT, KC_DOWN,      KC_RGHT, KC_ENTER,
                                     _______,         _______, _______,          _______, _______, _______
     ),
