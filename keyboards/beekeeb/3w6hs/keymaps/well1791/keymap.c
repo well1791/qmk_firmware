@@ -25,7 +25,6 @@ enum layers {
     _NA_R,
     _ME,
     _MO,
-    _DI,
     _GO,
 };
 
@@ -103,8 +102,8 @@ const uint16_t PROGMEM al_spc[] = {MODT_E, LT(_FF,KC_I), MODT_A, COMBO_END};
 const uint16_t PROGMEM al_esc[] = {MODT_H, LT(_NS, KC_U), MODT_O, COMBO_END};
 const uint16_t PROGMEM al_ret[] = {MODT_H, LT(_NS, KC_U), MODT_A, COMBO_END};
 const uint16_t PROGMEM al_bspc[] = {MODT_E, LT(_FF, KC_I), MODT_O, COMBO_END};
-const uint16_t PROGMEM al_tab_l[] = {LT(_NA_L, KC_M), MODT_O, LT(_NS, KC_U), COMBO_END};
-const uint16_t PROGMEM al_tab_r[] = {LT(_NA_R, KC_M), MODT_O, LT(_NS, KC_U), COMBO_END};
+const uint16_t PROGMEM al_tab_l[] = {LT(_FF, KC_I), MODT_A, LT(_NA_L, KC_M), COMBO_END};
+const uint16_t PROGMEM al_tab_r[] = {LT(_NA_R, KC_M), MODT_A, LT(_FF, KC_I), COMBO_END};
 const uint16_t PROGMEM al_caps[] = {MODT_A, LT(_FF, KC_I), MODT_H, COMBO_END};
 
 const uint16_t PROGMEM al_osm_sft[] = {MODT_H, MODT_E, COMBO_END};
@@ -117,8 +116,6 @@ const uint16_t PROGMEM al_osm_meh[] = {MODT_E, LT(_NS, KC_U), MODT_O, COMBO_END}
 const uint16_t PROGMEM al_osl_ns[] = {MODT_E, LT(_NS, KC_U), MODT_A, COMBO_END};
 const uint16_t PROGMEM al_osl_ff[] = {MODT_H, MODT_O, KC_G, COMBO_END};
 const uint16_t PROGMEM al_osl_me[] = {LT(_NS, KC_U), MODT_O, KC_G, COMBO_END};
-const uint16_t PROGMEM al_osl_di_l[] = {LT(_FF, KC_I), MODT_A, LT(_NA_L, KC_M), COMBO_END};
-const uint16_t PROGMEM al_osl_di_r[] = {LT(_NA_R, KC_M), MODT_A, LT(_FF, KC_I), COMBO_END};
 const uint16_t PROGMEM al_osl_mo_l[] = {LT(_NA_L, KC_M), MODT_A, LT(_NS, KC_U), COMBO_END};
 const uint16_t PROGMEM al_osl_mo_r[] = {LT(_NA_R, KC_M), MODT_A, LT(_NS, KC_U), COMBO_END};
 const uint16_t PROGMEM al_osl_go_l[] = {MODT_E, MODT_A, LT(_NA_L, KC_M), COMBO_END};
@@ -214,8 +211,6 @@ combo_t key_combos[] = {
     COMBO(al_osl_me, OSL(_ME)),
     COMBO(al_osl_mo_l, OSL(_MO)),
     COMBO(al_osl_mo_r, OSL(_MO)),
-    COMBO(al_osl_di_l, OSL(_DI)),
-    COMBO(al_osl_di_r, OSL(_DI)),
     COMBO(al_osl_go_l, OSL(_GO)),
     COMBO(al_osl_go_r, OSL(_GO)),
 };
@@ -265,13 +260,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_MO] = LAYOUT_split_3x5_3(
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-                          _______, _______, _______,          _______, _______, _______
-    ),
-
-    [_DI] = LAYOUT_split_3x5_3(
         _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
