@@ -51,14 +51,14 @@ const uint16_t PROGMEM ns_curbr_r[] = {KC_1, KC_3, COMBO_END};
 const uint16_t PROGMEM ns_paren_l[] = {KC_7, KC_0, COMBO_END};
 const uint16_t PROGMEM ns_paren_r[] = {KC_1, KC_QUOTE, COMBO_END};
 const uint16_t PROGMEM ns_dot[] = {KC_8, KC_3, COMBO_END};
-const uint16_t PROGMEM ns_semicolon[] = {KC_9, KC_QUOTE, COMBO_END};
+const uint16_t PROGMEM ns_semicolon[] = {KC_9, KC_2, COMBO_END};
 const uint16_t PROGMEM ns_slash[] = {KC_1, KC_9, COMBO_END};
 const uint16_t PROGMEM ns_bslash[] = {KC_7, KC_3, COMBO_END};
 const uint16_t PROGMEM ns_hyphen[] = {KC_1, KC_0, COMBO_END};
 const uint16_t PROGMEM ns_underscore[] = {KC_7, KC_QUOTE, COMBO_END};
-const uint16_t PROGMEM ns_comma[] = {KC_2, KC_9, COMBO_END};
-const uint16_t PROGMEM ns_equals[] = {KC_3, KC_QUOTE, COMBO_END};
-const uint16_t PROGMEM ns_dblquots[] = {KC_9, KC_0, COMBO_END};
+const uint16_t PROGMEM ns_comma[] = {KC_1, KC_8, COMBO_END};
+const uint16_t PROGMEM ns_equals[] = {KC_9, KC_0, COMBO_END};
+const uint16_t PROGMEM ns_dblquots[] = {KC_3, KC_QUOTE, COMBO_END};
 const uint16_t PROGMEM ns_qstn_mrk[] = {KC_1, KC_2, KC_3, COMBO_END};
 const uint16_t PROGMEM ns_excl_mrk[] = {KC_7, KC_8, KC_9, COMBO_END};
 const uint16_t PROGMEM ns_colon[] = {KC_1, KC_8, KC_3, COMBO_END};
@@ -71,7 +71,7 @@ const uint16_t PROGMEM ns_dollar[] = {KC_1, KC_3, KC_QUOTE, COMBO_END};
 const uint16_t PROGMEM ns_percentage[] = {KC_7, KC_9, KC_0, COMBO_END};
 const uint16_t PROGMEM ns_plus[] = {KC_7, KC_2, KC_3, COMBO_END};
 const uint16_t PROGMEM ns_hash[] = {KC_8, KC_3, KC_QUOTE, COMBO_END};
-const uint16_t PROGMEM ns_at[] = {KC_8, KC_9, KC_QUOTE, COMBO_END};
+const uint16_t PROGMEM ns_at[] = {KC_9, KC_QUOTE, COMBO_END};
 const uint16_t PROGMEM ns_circ[] = {KC_7, KC_2, COMBO_END};
 
 const uint16_t PROGMEM al_n[] = {AL_A, AL_I, COMBO_END};
@@ -84,18 +84,18 @@ const uint16_t PROGMEM al_c_l[] = {AL_M_L, AL_E, COMBO_END};
 const uint16_t PROGMEM al_c_r[] = {AL_M_R, AL_E, COMBO_END};
 const uint16_t PROGMEM al_p[] = {AL_G, AL_E, COMBO_END};
 const uint16_t PROGMEM al_y[] = {AL_G, AL_H, COMBO_END};
-const uint16_t PROGMEM al_b_l[] = {AL_M_L, AL_H, COMBO_END};
-const uint16_t PROGMEM al_b_r[] = {AL_M_R, AL_H, COMBO_END};
-const uint16_t PROGMEM al_f[] = {AL_H, AL_A, COMBO_END};
-const uint16_t PROGMEM al_v_l[] = {AL_M_L, AL_A, COMBO_END};
-const uint16_t PROGMEM al_v_r[] = {AL_M_R, AL_A, COMBO_END};
-const uint16_t PROGMEM al_w[] = {AL_O, AL_G, COMBO_END};
-const uint16_t PROGMEM al_q[] = {AL_I, AL_O, COMBO_END};
-const uint16_t PROGMEM al_x_l[] = {AL_M_L, AL_O, COMBO_END};
-const uint16_t PROGMEM al_x_r[] = {AL_M_R, AL_O, COMBO_END};
-const uint16_t PROGMEM al_k[] = {AL_H, AL_U, COMBO_END};
-const uint16_t PROGMEM al_j[] = {AL_E, AL_I, COMBO_END};
-const uint16_t PROGMEM al_z[] = {AL_E, AL_U, COMBO_END};
+const uint16_t PROGMEM al_b_l[] = {AL_M_L, AL_A, COMBO_END};
+const uint16_t PROGMEM al_b_r[] = {AL_M_R, AL_A, COMBO_END};
+const uint16_t PROGMEM al_f[] = {AL_O, AL_G, COMBO_END};
+const uint16_t PROGMEM al_v[] = {AL_E, AL_I, COMBO_END};
+const uint16_t PROGMEM al_w[] = {AL_H, AL_U, COMBO_END};
+const uint16_t PROGMEM al_q[] = {AL_E, AL_U, COMBO_END};
+const uint16_t PROGMEM al_x[] = {AL_H, AL_A, COMBO_END};
+const uint16_t PROGMEM al_k_l[] = {AL_M_L, AL_H, COMBO_END};
+const uint16_t PROGMEM al_k_r[] = {AL_M_R, AL_H, COMBO_END};
+const uint16_t PROGMEM al_j[] = {AL_O, AL_I, COMBO_END};
+const uint16_t PROGMEM al_z_l[] = {AL_M_L, AL_O, COMBO_END};
+const uint16_t PROGMEM al_z_r[] = {AL_M_R, AL_O, COMBO_END};
 
 const uint16_t PROGMEM al_spc[] = {AL_E, AL_I, AL_A, COMBO_END};
 const uint16_t PROGMEM al_esc[] = {AL_H, AL_U, AL_O, COMBO_END};
@@ -188,15 +188,15 @@ combo_t key_combos[] = {
     COMBO(al_b_l, KC_B),
     COMBO(al_b_r, KC_B),
     COMBO(al_f, KC_F),
-    COMBO(al_v_l, KC_V),
-    COMBO(al_v_r, KC_V),
+    COMBO(al_v, KC_V),
     COMBO(al_w, KC_W),
     COMBO(al_q, KC_Q),
-    COMBO(al_x_l, KC_X),
-    COMBO(al_x_r, KC_X),
-    COMBO(al_k, KC_K),
+    COMBO(al_x, KC_X),
+    COMBO(al_k_l, KC_K),
+    COMBO(al_k_r, KC_K),
     COMBO(al_j, KC_J),
-    COMBO(al_z, KC_Z),
+    COMBO(al_z_l, KC_Z),
+    COMBO(al_z_r, KC_Z),
 
     COMBO(al_osm_ctl, OSM(MOD_LCTL)),
     COMBO(al_osm_sft, OSM(MOD_LSFT)),
