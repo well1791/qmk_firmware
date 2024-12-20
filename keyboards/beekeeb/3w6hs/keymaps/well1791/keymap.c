@@ -214,6 +214,99 @@ combo_t key_combos[] = {
     COMBO(al_osl_go_r, OSL(_GO)),
 };
 
+enum custom_keycodes {
+    CTL_TAB = SAFE_RANGE,
+    FST_TAB,
+    LST_TAB,
+    CLS_TAB,
+    PRV_TAB,
+    NXT_TAB,
+    NXT_WIN,
+    NXT_SPC,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CTL_TAB:
+            if (record->event.pressed) {
+                register_code(KC_LCTL);
+                tap_code(KC_TAB);
+            } else {
+                unregister_code(KC_LCTL);
+            }
+            return false;
+        case FST_TAB:
+            // OS based
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                tap_code(KC_1);
+            } else {
+                unregister_code(KC_LGUI);
+            }
+            return false;
+        case LST_TAB:
+            // OS based
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                tap_code(KC_9);
+            } else {
+                unregister_code(KC_LGUI);
+            }
+            return false;
+        case CLS_TAB:
+            // OS based
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                tap_code(KC_W);
+            } else {
+                unregister_code(KC_LGUI);
+            }
+            return false;
+        case PRV_TAB:
+            // OS based
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_LSFT);
+                tap_code(KC_LBRC);
+            } else {
+                unregister_code(KC_LGUI);
+                unregister_code(KC_LSFT);
+            }
+            return false;
+        case NXT_TAB:
+            // OS based
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_LSFT);
+                tap_code(KC_RBRC);
+            } else {
+                unregister_code(KC_LGUI);
+                unregister_code(KC_LSFT);
+            }
+            return false;
+        case NXT_WIN:
+            // OS based
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                tap_code(KC_GRAVE);
+            } else {
+                unregister_code(KC_LGUI);
+            }
+            return false;
+        case NXT_SPC:
+            if (record->event.pressed) {
+                register_code(KC_LCTL);
+                register_code(KC_LALT);
+                tap_code(KC_Q);
+            } else {
+                unregister_code(KC_LCTL);
+                unregister_code(KC_LALT);
+            }
+            return false;
+    }
+    return true;
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_AL] = LAYOUT_split_3x5_3(
@@ -266,8 +359,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_GO] = LAYOUT_split_3x5_3(
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
+        NXT_SPC, LST_TAB, PRV_TAB, FST_TAB, _______,          _______, FST_TAB, PRV_TAB, LST_TAB, NXT_SPC,
+        NXT_WIN, CTL_TAB, NXT_TAB, CLS_TAB, _______,          _______, CLS_TAB, NXT_TAB, CTL_TAB, NXT_WIN,
         _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
                           _______, _______, _______,          _______, _______, _______
     )
