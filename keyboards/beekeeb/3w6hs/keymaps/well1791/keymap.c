@@ -24,8 +24,8 @@ enum layers {
     _NA_L,
     _NA_R,
     _ME,
-    _MO,
     _GO,
+    _MO,
 };
 
 const uint16_t PROGMEM na_spc[] = {KC_LEFT, KC_DOWN, KC_RIGHT, COMBO_END};
@@ -101,9 +101,7 @@ const uint16_t PROGMEM al_spc[] = {AL_E, AL_I, AL_A, COMBO_END};
 const uint16_t PROGMEM al_esc[] = {AL_H, AL_U, AL_O, COMBO_END};
 const uint16_t PROGMEM al_ret[] = {AL_H, AL_U, AL_A, COMBO_END};
 const uint16_t PROGMEM al_bspc[] = {AL_E, AL_I, AL_O, COMBO_END};
-const uint16_t PROGMEM al_tab_l[] = {AL_I, AL_A, AL_M_L, COMBO_END};
-const uint16_t PROGMEM al_tab_r[] = {AL_M_R, AL_A, AL_I, COMBO_END};
-const uint16_t PROGMEM al_caps[] = {AL_A, AL_I, AL_H, COMBO_END};
+const uint16_t PROGMEM al_caps[] = {AL_H, AL_O, AL_G, COMBO_END};
 
 const uint16_t PROGMEM al_osm_sft[] = {AL_H, AL_E, COMBO_END};
 const uint16_t PROGMEM al_osm_gui[] = {AL_U, AL_I, COMBO_END};
@@ -113,12 +111,12 @@ const uint16_t PROGMEM al_osm_alt_r[] = {AL_G, AL_M_R, COMBO_END};
 const uint16_t PROGMEM al_osm_meh[] = {AL_E, AL_U, AL_O, COMBO_END};
 
 const uint16_t PROGMEM al_osl_ns[] = {AL_E, AL_U, AL_A, COMBO_END};
-const uint16_t PROGMEM al_osl_ff[] = {AL_H, AL_O, AL_G, COMBO_END};
+const uint16_t PROGMEM al_osl_ff[] = {AL_H, AL_I, AL_A, COMBO_END};
 const uint16_t PROGMEM al_osl_me[] = {AL_U, AL_O, AL_G, COMBO_END};
-const uint16_t PROGMEM al_osl_mo_l[] = {AL_M_L, AL_A, AL_U, COMBO_END};
-const uint16_t PROGMEM al_osl_mo_r[] = {AL_M_R, AL_A, AL_U, COMBO_END};
-const uint16_t PROGMEM al_osl_go_l[] = {AL_E, AL_A, AL_M_L, COMBO_END};
-const uint16_t PROGMEM al_osl_go_r[] = {AL_M_R, AL_A, AL_E, COMBO_END};
+const uint16_t PROGMEM al_osl_mo_l[] = {AL_U, AL_A, AL_M_L, COMBO_END};
+const uint16_t PROGMEM al_osl_mo_r[] = {AL_U, AL_A, AL_M_R, COMBO_END};
+const uint16_t PROGMEM al_osl_go_l[] = {AL_I, AL_A, AL_M_L, COMBO_END};
+const uint16_t PROGMEM al_osl_go_r[] = {AL_I, AL_A, AL_M_R, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(na_spc, KC_SPACE),
@@ -171,8 +169,6 @@ combo_t key_combos[] = {
     COMBO(al_esc, KC_ESCAPE),
     COMBO(al_ret, KC_ENTER),
     COMBO(al_bspc, KC_BACKSPACE),
-    COMBO(al_tab_l, KC_TAB),
-    COMBO(al_tab_r, KC_TAB),
     COMBO(al_caps, KC_CAPS),
 
     COMBO(al_n, KC_N),
@@ -215,19 +211,21 @@ combo_t key_combos[] = {
 };
 
 enum custom_keycodes {
-    CTL_TAB = SAFE_RANGE,
-    FST_TAB,
-    LST_TAB,
-    CLS_TAB,
-    PRV_TAB,
-    NXT_TAB,
-    NXT_WIN,
-    NXT_SPC,
+    GO_CTL_TAB = SAFE_RANGE,
+    GO_FST_TAB,
+    GO_LST_TAB,
+    GO_CLS_TAB,
+    GO_PRV_TAB,
+    GO_NXT_TAB,
+    GO_NXT_WIN,
+    GO_NXT_SPC,
+    NA_UNDO,
+    NA_REDO,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CTL_TAB:
+        case GO_CTL_TAB:
             if (record->event.pressed) {
                 register_code(KC_LCTL);
                 tap_code(KC_TAB);
@@ -235,7 +233,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LCTL);
             }
             return false;
-        case FST_TAB:
+        case GO_FST_TAB:
             // OS based
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -244,7 +242,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LGUI);
             }
             return false;
-        case LST_TAB:
+        case GO_LST_TAB:
             // OS based
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -253,7 +251,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LGUI);
             }
             return false;
-        case CLS_TAB:
+        case GO_CLS_TAB:
             // OS based
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -262,7 +260,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LGUI);
             }
             return false;
-        case PRV_TAB:
+        case GO_PRV_TAB:
             // OS based
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -273,7 +271,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LSFT);
             }
             return false;
-        case NXT_TAB:
+        case GO_NXT_TAB:
             // OS based
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -284,7 +282,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LSFT);
             }
             return false;
-        case NXT_WIN:
+        case GO_NXT_WIN:
             // OS based
             if (record->event.pressed) {
                 register_code(KC_LGUI);
@@ -293,7 +291,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LGUI);
             }
             return false;
-        case NXT_SPC:
+        case GO_NXT_SPC:
             if (record->event.pressed) {
                 register_code(KC_LCTL);
                 register_code(KC_LALT);
@@ -301,6 +299,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(KC_LCTL);
                 unregister_code(KC_LALT);
+            }
+            return false;
+        case NA_UNDO:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                tap_code(KC_Z);
+            } else {
+                unregister_code(KC_LGUI);
+            }
+            return false;
+        case NA_REDO:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_LSFT);
+                tap_code(KC_Z);
+            } else {
+                unregister_code(KC_LGUI);
+                unregister_code(KC_LSFT);
             }
             return false;
     }
@@ -331,15 +347,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NA_L] = LAYOUT_split_3x5_3(
-         TO(_AL), KC_BACKSPACE,   KC_UP,  KC_TAB, _______,          _______, LALT_T(KC_PGUP), _______, LGUI_T(KC_COPY), TO(_NA_R),
-        KC_ENTER,      KC_LEFT, KC_DOWN, KC_RGHT, _______,          _______, LSFT_T(KC_PGDN), _______, LCTL_T(KC_PSTE),   TO(_AL),
+         TO(_AL), KC_BACKSPACE,   KC_UP,  KC_TAB, _______,          _______, LALT_T(KC_PGUP), NA_REDO, LGUI_T(KC_COPY), TO(_NA_R),
+        KC_ENTER,      KC_LEFT, KC_DOWN, KC_RGHT, _______,          _______, LSFT_T(KC_PGDN), NA_UNDO, LCTL_T(KC_PSTE),   TO(_AL),
          _______,      _______, _______, _______, _______,          _______,         _______, _______,         _______,   _______,
                                 _______, _______, _______,          _______,         _______, _______
     ),
 
     [_NA_R] = LAYOUT_split_3x5_3(
-        TO(_NA_L), LGUI_T(KC_COPY), _______, LALT_T(KC_PGUP), _______,          _______,  KC_TAB,   KC_UP, KC_BACKSPACE,  TO(_AL),
-          TO(_AL), LCTL_T(KC_PSTE), _______, LSFT_T(KC_PGDN), _______,          _______, KC_LEFT, KC_DOWN,      KC_RGHT, KC_ENTER,
+        TO(_NA_L), LGUI_T(KC_COPY), NA_REDO, LALT_T(KC_PGUP), _______,          _______,  KC_TAB,   KC_UP, KC_BACKSPACE,  TO(_AL),
+          TO(_AL), LCTL_T(KC_PSTE), NA_UNDO, LSFT_T(KC_PGDN), _______,          _______, KC_LEFT, KC_DOWN,      KC_RGHT, KC_ENTER,
           _______,         _______, _______,         _______, _______,          _______, _______, _______,      _______,  _______,
                                     _______,         _______, _______,          _______, _______, _______
     ),
@@ -351,16 +367,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           _______, _______, _______,          _______, _______, _______
     ),
 
+    [_GO] = LAYOUT_split_3x5_3(
+        GO_NXT_SPC, GO_LST_TAB, GO_PRV_TAB,     KC_TAB, _______,          _______,     KC_TAB, GO_PRV_TAB, GO_LST_TAB, GO_NXT_SPC,
+        GO_NXT_WIN, GO_CTL_TAB, GO_NXT_TAB, GO_CLS_TAB, _______,          _______, GO_CLS_TAB, GO_NXT_TAB, GO_CTL_TAB, GO_NXT_WIN,
+           _______,    _______,    _______,    _______, _______,          _______,    _______,    _______,    _______,    _______,
+                                   _______,    _______, _______,          _______,    _______,    _______
+    ),
+
     [_MO] = LAYOUT_split_3x5_3(
         _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-                          _______, _______, _______,          _______, _______, _______
-    ),
-
-    [_GO] = LAYOUT_split_3x5_3(
-        NXT_SPC, LST_TAB, PRV_TAB, FST_TAB, _______,          _______, FST_TAB, PRV_TAB, LST_TAB, NXT_SPC,
-        NXT_WIN, CTL_TAB, NXT_TAB, CLS_TAB, _______,          _______, CLS_TAB, NXT_TAB, CTL_TAB, NXT_WIN,
         _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
                           _______, _______, _______,          _______, _______, _______
     )
