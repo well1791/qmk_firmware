@@ -16,13 +16,14 @@
 
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
+#include "os_detection.h"
 
 enum layers {
     _AL = 0,
     _NS,
     _FF,
-    _NA_L,
-    _NA_R,
+    _NL,
+    _NR,
     _ME,
     _GO,
     _MO,
@@ -80,22 +81,22 @@ const uint16_t PROGMEM al_r[] = {AL_A, AL_U, COMBO_END};
 const uint16_t PROGMEM al_t[] = {AL_O, AL_E, COMBO_END};
 const uint16_t PROGMEM al_d[] = {AL_O, AL_U, COMBO_END};
 const uint16_t PROGMEM al_l[] = {AL_O, AL_H, COMBO_END};
-const uint16_t PROGMEM al_c_l[] = {AL_M_L, AL_E, COMBO_END};
-const uint16_t PROGMEM al_c_r[] = {AL_M_R, AL_E, COMBO_END};
+const uint16_t PROGMEM al_c_l[] = {AL_ML, AL_E, COMBO_END};
+const uint16_t PROGMEM al_c_r[] = {AL_MR, AL_E, COMBO_END};
 const uint16_t PROGMEM al_p[] = {AL_G, AL_E, COMBO_END};
 const uint16_t PROGMEM al_y[] = {AL_G, AL_H, COMBO_END};
-const uint16_t PROGMEM al_b_l[] = {AL_M_L, AL_A, COMBO_END};
-const uint16_t PROGMEM al_b_r[] = {AL_M_R, AL_A, COMBO_END};
+const uint16_t PROGMEM al_b_l[] = {AL_ML, AL_A, COMBO_END};
+const uint16_t PROGMEM al_b_r[] = {AL_MR, AL_A, COMBO_END};
 const uint16_t PROGMEM al_f[] = {AL_O, AL_G, COMBO_END};
 const uint16_t PROGMEM al_v[] = {AL_E, AL_I, COMBO_END};
 const uint16_t PROGMEM al_w[] = {AL_H, AL_U, COMBO_END};
 const uint16_t PROGMEM al_q[] = {AL_E, AL_U, COMBO_END};
 const uint16_t PROGMEM al_x[] = {AL_H, AL_A, COMBO_END};
-const uint16_t PROGMEM al_k_l[] = {AL_M_L, AL_H, COMBO_END};
-const uint16_t PROGMEM al_k_r[] = {AL_M_R, AL_H, COMBO_END};
+const uint16_t PROGMEM al_k_l[] = {AL_ML, AL_H, COMBO_END};
+const uint16_t PROGMEM al_k_r[] = {AL_MR, AL_H, COMBO_END};
 const uint16_t PROGMEM al_j[] = {AL_O, AL_I, COMBO_END};
-const uint16_t PROGMEM al_z_l[] = {AL_M_L, AL_O, COMBO_END};
-const uint16_t PROGMEM al_z_r[] = {AL_M_R, AL_O, COMBO_END};
+const uint16_t PROGMEM al_z_l[] = {AL_ML, AL_O, COMBO_END};
+const uint16_t PROGMEM al_z_r[] = {AL_MR, AL_O, COMBO_END};
 
 const uint16_t PROGMEM al_spc[] = {AL_E, AL_I, AL_A, COMBO_END};
 const uint16_t PROGMEM al_esc[] = {AL_H, AL_U, AL_O, COMBO_END};
@@ -106,17 +107,17 @@ const uint16_t PROGMEM al_caps[] = {AL_H, AL_O, AL_G, COMBO_END};
 const uint16_t PROGMEM al_osm_sft[] = {AL_H, AL_E, COMBO_END};
 const uint16_t PROGMEM al_osm_gui[] = {AL_U, AL_I, COMBO_END};
 const uint16_t PROGMEM al_osm_ctl[] = {AL_O, AL_A, COMBO_END};
-const uint16_t PROGMEM al_osm_alt_l[] = {AL_G, AL_M_L, COMBO_END};
-const uint16_t PROGMEM al_osm_alt_r[] = {AL_G, AL_M_R, COMBO_END};
+const uint16_t PROGMEM al_osm_alt_l[] = {AL_G, AL_ML, COMBO_END};
+const uint16_t PROGMEM al_osm_alt_r[] = {AL_G, AL_MR, COMBO_END};
 const uint16_t PROGMEM al_osm_meh[] = {AL_E, AL_U, AL_O, COMBO_END};
 
 const uint16_t PROGMEM al_osl_ns[] = {AL_E, AL_U, AL_A, COMBO_END};
 const uint16_t PROGMEM al_osl_ff[] = {AL_H, AL_I, AL_A, COMBO_END};
 const uint16_t PROGMEM al_osl_me[] = {AL_U, AL_O, AL_G, COMBO_END};
-const uint16_t PROGMEM al_osl_mo_l[] = {AL_U, AL_A, AL_M_L, COMBO_END};
-const uint16_t PROGMEM al_osl_mo_r[] = {AL_U, AL_A, AL_M_R, COMBO_END};
-const uint16_t PROGMEM al_osl_go_l[] = {AL_I, AL_A, AL_M_L, COMBO_END};
-const uint16_t PROGMEM al_osl_go_r[] = {AL_I, AL_A, AL_M_R, COMBO_END};
+const uint16_t PROGMEM al_osl_mo_l[] = {AL_U, AL_A, AL_ML, COMBO_END};
+const uint16_t PROGMEM al_osl_mo_r[] = {AL_U, AL_A, AL_MR, COMBO_END};
+const uint16_t PROGMEM al_osl_go_l[] = {AL_I, AL_A, AL_ML, COMBO_END};
+const uint16_t PROGMEM al_osl_go_r[] = {AL_I, AL_A, AL_MR, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(na_spc, KC_SPACE),
@@ -167,8 +168,8 @@ combo_t key_combos[] = {
 
     COMBO(al_spc, KC_SPACE),
     COMBO(al_esc, KC_ESCAPE),
-    COMBO(al_ret, KC_ENTER),
-    COMBO(al_bspc, KC_BACKSPACE),
+    COMBO(al_ret, KC_ENT),
+    COMBO(al_bspc, KC_BSPC),
     COMBO(al_caps, KC_CAPS),
 
     COMBO(al_n, KC_N),
@@ -211,21 +212,27 @@ combo_t key_combos[] = {
 };
 
 enum custom_keycodes {
-    GO_CTL_TAB = SAFE_RANGE,
-    GO_FST_TAB,
-    GO_LST_TAB,
-    GO_CLS_TAB,
-    GO_PRV_TAB,
-    GO_NXT_TAB,
-    GO_NXT_WIN,
-    GO_NXT_SPC,
-    NA_UNDO,
-    NA_REDO,
+    CTL_TAB = SAFE_RANGE,
+    FST_TAB,
+    LST_TAB,
+    CLS_TAB,
+    PRV_TAB,
+    NXT_TAB,
+    NXT_WIN,
+    NXT_SPC,
+    REDO,
+    UNDO,
+    CUT,
+    COPY,
+    PSTE,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    const bool is_mac = detected_host_os() == OS_MACOS;
+    uint16_t KC_GUI_CTL = is_mac ? KC_LGUI : KC_LCTL; // uint8_t ??
+
     switch (keycode) {
-        case GO_CTL_TAB:
+        case CTL_TAB:
             if (record->event.pressed) {
                 register_code(KC_LCTL);
                 tap_code(KC_TAB);
@@ -233,26 +240,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LCTL);
             }
             return false;
-        case GO_FST_TAB:
-            // OS based
+        case FST_TAB:
             if (record->event.pressed) {
-                register_code(KC_LGUI);
+                register_code(KC_GUI_CTL);
                 tap_code(KC_1);
             } else {
-                unregister_code(KC_LGUI);
+                unregister_code(KC_GUI_CTL);
             }
             return false;
-        case GO_LST_TAB:
-            // OS based
+        case LST_TAB:
             if (record->event.pressed) {
-                register_code(KC_LGUI);
+                register_code(KC_GUI_CTL);
                 tap_code(KC_9);
             } else {
-                unregister_code(KC_LGUI);
+                unregister_code(KC_GUI_CTL);
             }
             return false;
-        case GO_CLS_TAB:
-            // OS based
+        case CLS_TAB:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
                 tap_code(KC_W);
@@ -260,8 +264,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LGUI);
             }
             return false;
-        case GO_PRV_TAB:
-            // OS based
+        case PRV_TAB:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
                 register_code(KC_LSFT);
@@ -271,8 +274,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LSFT);
             }
             return false;
-        case GO_NXT_TAB:
-            // OS based
+        case NXT_TAB:
             if (record->event.pressed) {
                 register_code(KC_LGUI);
                 register_code(KC_LSFT);
@@ -282,8 +284,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LSFT);
             }
             return false;
-        case GO_NXT_WIN:
-            // OS based
+        case NXT_WIN: // same app
             if (record->event.pressed) {
                 register_code(KC_LGUI);
                 tap_code(KC_GRAVE);
@@ -291,7 +292,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LGUI);
             }
             return false;
-        case GO_NXT_SPC:
+        case NXT_SPC: // workspace (zen browser)
             if (record->event.pressed) {
                 register_code(KC_LCTL);
                 register_code(KC_LALT);
@@ -301,22 +302,46 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LALT);
             }
             return false;
-        case NA_UNDO:
+        case REDO:
             if (record->event.pressed) {
-                register_code(KC_LGUI);
-                tap_code(KC_Z);
-            } else {
-                unregister_code(KC_LGUI);
-            }
-            return false;
-        case NA_REDO:
-            if (record->event.pressed) {
-                register_code(KC_LGUI);
+                register_code(KC_GUI_CTL);
                 register_code(KC_LSFT);
                 tap_code(KC_Z);
             } else {
-                unregister_code(KC_LGUI);
+                unregister_code(KC_GUI_CTL);
                 unregister_code(KC_LSFT);
+            }
+            return false;
+        case UNDO:
+            if (record->event.pressed) {
+                register_code(KC_GUI_CTL);
+                tap_code(KC_Z);
+            } else {
+                unregister_code(KC_GUI_CTL);
+            }
+            return false;
+        case CUT:
+            if (record->event.pressed) {
+                register_code(KC_GUI_CTL);
+                tap_code(KC_X);
+            } else {
+                unregister_code(KC_GUI_CTL);
+            }
+            return false;
+        case COPY:
+            if (record->event.pressed) {
+                register_code(KC_GUI_CTL);
+                tap_code(KC_C);
+            } else {
+                unregister_code(KC_GUI_CTL);
+            }
+            return false;
+        case PSTE:
+            if (record->event.pressed) {
+                register_code(KC_GUI_CTL);
+                tap_code(KC_V);
+            } else {
+                unregister_code(KC_GUI_CTL);
             }
             return false;
     }
@@ -325,59 +350,59 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [_AL] = LAYOUT_split_3x5_3(
-           AL_G,    AL_O,    AL_U,    AL_H, _______,          _______,    AL_H,    AL_U,    AL_O,    AL_G,
-         AL_M_R,    AL_A,    AL_I,    AL_E, _______,          _______,    AL_E,    AL_I,    AL_A,  AL_M_L,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-                          _______, _______, _______,          _______, _______, _______
-    ),
+    [_AL] = LAYOUT_split_3x5_3(                      /*||*/
+           AL_G,    AL_O,    AL_U,    AL_H, _______, /*||*/ _______,    AL_H,    AL_U,    AL_O,    AL_G,
+          AL_MR,    AL_A,    AL_I,    AL_E, _______, /*||*/ _______,    AL_E,    AL_I,    AL_A,   AL_ML,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    ),                                               /*||*/
 
-    [_NS] = LAYOUT_split_3x5_3(
-           KC_0,    KC_9,    KC_8,    KC_7, _______,          _______,    KC_7,    KC_8,    KC_9,    KC_0,
-        KC_QUOT,    KC_3,    KC_2,    KC_1, _______,          _______,    KC_1,    KC_2,    KC_3, KC_QUOT,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-                          _______, _______, _______,          _______, _______, _______
-    ),
+    [_NS] = LAYOUT_split_3x5_3(                      /*||*/
+           KC_0,    KC_9,    KC_8,    KC_7, _______, /*||*/ _______,    KC_7,    KC_8,    KC_9,    KC_0,
+        KC_QUOT,    KC_3,    KC_2,    KC_1, _______, /*||*/ _______,    KC_1,    KC_2,    KC_3, KC_QUOT,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    ),                                               /*||*/
 
-    [_FF] = LAYOUT_split_3x5_3(
-         KC_F11,   KC_F9,   KC_F8,   KC_F7, _______,          _______,   KC_F7,   KC_F8,   KC_F9,  KC_F11,
-         KC_F10,   KC_F3,   KC_F2,   KC_F1, _______,          _______,   KC_F1,   KC_F2,   KC_F3,  KC_F10,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-                          _______, _______, _______,          _______, _______, _______
-    ),
+    [_FF] = LAYOUT_split_3x5_3(                      /*||*/
+         KC_F11,   KC_F9,   KC_F8,   KC_F7, _______, /*||*/ _______,   KC_F7,   KC_F8,   KC_F9,  KC_F11,
+         KC_F10,   KC_F3,   KC_F2,   KC_F1, _______, /*||*/ _______,   KC_F1,   KC_F2,   KC_F3,  KC_F10,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    ),                                               /*||*/
 
-    [_NA_L] = LAYOUT_split_3x5_3(
-         TO(_AL), KC_BACKSPACE,   KC_UP,  KC_TAB, _______,          _______, LALT_T(KC_PGUP), NA_REDO, LGUI_T(KC_COPY), TO(_NA_R),
-        KC_ENTER,      KC_LEFT, KC_DOWN, KC_RGHT, _______,          _______, LSFT_T(KC_PGDN), NA_UNDO, LCTL_T(KC_PSTE),   TO(_AL),
-         _______,      _______, _______, _______, _______,          _______,         _______, _______,         _______,   _______,
-                                _______, _______, _______,          _______,         _______, _______
-    ),
+    [_NL] = LAYOUT_split_3x5_3(                      /*||*/
+        TO(_AL), KC_BSPC,   KC_UP,  KC_TAB, _______, /*||*/ _______,  N_PGUP,    REDO,  N_COPY, TO(_NR),
+         KC_ENT, KC_LEFT, KC_DOWN, KC_RGHT, _______, /*||*/ _______,  N_PGDN,    UNDO,  N_PSTE, TO(_AL),
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    ),                                               /*||*/
 
-    [_NA_R] = LAYOUT_split_3x5_3(
-        TO(_NA_L), LGUI_T(KC_COPY), NA_REDO, LALT_T(KC_PGUP), _______,          _______,  KC_TAB,   KC_UP, KC_BACKSPACE,  TO(_AL),
-          TO(_AL), LCTL_T(KC_PSTE), NA_UNDO, LSFT_T(KC_PGDN), _______,          _______, KC_LEFT, KC_DOWN,      KC_RGHT, KC_ENTER,
-          _______,         _______, _______,         _______, _______,          _______, _______, _______,      _______,  _______,
-                                    _______,         _______, _______,          _______, _______, _______
-    ),
+    [_NR] = LAYOUT_split_3x5_3(                      /*||*/
+        TO(_NL),  N_COPY,    REDO,  N_PGUP, _______, /*||*/ _______,  KC_TAB,   KC_UP, KC_BSPC, TO(_AL),
+        TO(_AL),  N_PSTE,    UNDO,  N_PGDN, _______, /*||*/ _______, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    ),                                               /*||*/
 
-    [_ME] = LAYOUT_split_3x5_3(
-        KC_BRIU, KC_MPRV, KC_VOLU, KC_MUTE, _______,          _______, KC_MUTE, KC_VOLU, KC_MPRV, KC_BRIU,
-        KC_BRID, KC_MNXT, KC_VOLD, KC_MPLY, _______,          _______, KC_MPLY, KC_VOLD, KC_MNXT, KC_BRID,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-                          _______, _______, _______,          _______, _______, _______
-    ),
+    [_ME] = LAYOUT_split_3x5_3(                      /*||*/
+        KC_BRIU, KC_MPRV, KC_VOLU, KC_MUTE, _______, /*||*/ _______, KC_MUTE, KC_VOLU, KC_MPRV, KC_BRIU,
+        KC_BRID, KC_MNXT, KC_VOLD, KC_MPLY, _______, /*||*/ _______, KC_MPLY, KC_VOLD, KC_MNXT, KC_BRID,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    ),                                               /*||*/
 
-    [_GO] = LAYOUT_split_3x5_3(
-        GO_NXT_SPC, GO_LST_TAB, GO_PRV_TAB,     KC_TAB, _______,          _______,     KC_TAB, GO_PRV_TAB, GO_LST_TAB, GO_NXT_SPC,
-        GO_NXT_WIN, GO_CTL_TAB, GO_NXT_TAB, GO_CLS_TAB, _______,          _______, GO_CLS_TAB, GO_NXT_TAB, GO_CTL_TAB, GO_NXT_WIN,
-           _______,    _______,    _______,    _______, _______,          _______,    _______,    _______,    _______,    _______,
-                                   _______,    _______, _______,          _______,    _______,    _______
-    ),
+    [_GO] = LAYOUT_split_3x5_3(                      /*||*/
+        NXT_SPC, LST_TAB, PRV_TAB,  KC_TAB, _______, /*||*/ _______,  KC_TAB, PRV_TAB, LST_TAB, NXT_SPC,
+        NXT_WIN, CTL_TAB, NXT_TAB, CLS_TAB, _______, /*||*/ _______, CLS_TAB, NXT_TAB, CTL_TAB, NXT_WIN,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    ),                                               /*||*/
 
-    [_MO] = LAYOUT_split_3x5_3(
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______,
-                          _______, _______, _______,          _______, _______, _______
-    )
+    [_MO] = LAYOUT_split_3x5_3(                      /*||*/
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
+    )                                                /*||*/
 };
