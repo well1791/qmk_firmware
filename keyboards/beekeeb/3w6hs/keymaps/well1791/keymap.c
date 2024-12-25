@@ -258,38 +258,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case CLS_TAB:
             if (record->event.pressed) {
-                register_code(KC_LGUI);
+                register_code(KC_GUI_CTL);
                 tap_code(KC_W);
             } else {
-                unregister_code(KC_LGUI);
+                unregister_code(KC_GUI_CTL);
             }
             return false;
         case PRV_TAB:
             if (record->event.pressed) {
-                register_code(KC_LGUI);
+                register_code(KC_GUI_CTL);
                 register_code(KC_LSFT);
-                tap_code(KC_LBRC);
+                tap_code(is_mac ? KC_LBRC : KC_TAB);
             } else {
-                unregister_code(KC_LGUI);
+                unregister_code(KC_GUI_CTL);
                 unregister_code(KC_LSFT);
             }
             return false;
         case NXT_TAB:
             if (record->event.pressed) {
-                register_code(KC_LGUI);
-                register_code(KC_LSFT);
-                tap_code(KC_RBRC);
+                register_code(KC_GUI_CTL);
+                if (is_mac) {
+                    register_code(KC_LSFT);
+                }
+                tap_code(is_mac ? KC_RBRC : KC_TAB);
             } else {
-                unregister_code(KC_LGUI);
-                unregister_code(KC_LSFT);
+                unregister_code(KC_GUI_CTL);
+                if (is_mac) {
+                    unregister_code(KC_LSFT);
+                }
             }
             return false;
         case NXT_WIN: // same app
             if (record->event.pressed) {
-                register_code(KC_LGUI);
+                register_code(is_mac ? KC_LGUI : KC_LALT);
                 tap_code(KC_GRAVE);
             } else {
-                unregister_code(KC_LGUI);
+                unregister_code(is_mac ? KC_LGUI : KC_LALT);
             }
             return false;
         case NXT_SPC: // workspace (zen browser)
@@ -329,19 +333,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case COPY:
-            if (record->event.pressed) {
-                register_code(KC_GUI_CTL);
-                tap_code(KC_C);
-            } else {
-                unregister_code(KC_GUI_CTL);
+            if (record->tap.count > 0) { // key is being tapped
+                if (record->event.pressed) {
+                    register_code(KC_GUI_CTL);
+                    tap_code(KC_C);
+                } else {
+                    unregister_code(KC_GUI_CTL);
+                }
+            } else { // key is being held
+                if (record->event.pressed) {
+                    register_code(KC_LGUI);
+                } else {
+                    unregister_code(KC_LGUI);
+                }
             }
             return false;
         case PSTE:
-            if (record->event.pressed) {
-                register_code(KC_GUI_CTL);
-                tap_code(KC_V);
-            } else {
-                unregister_code(KC_GUI_CTL);
+            if (record->tap.count > 0) { // key is being tapped
+                if (record->event.pressed) {
+                    register_code(KC_GUI_CTL);
+                    tap_code(KC_V);
+                } else {
+                    unregister_code(KC_GUI_CTL);
+                }
+            } else { // key is being held
+                if (record->event.pressed) {
+                    register_code(KC_LCTL);
+                } else {
+                    unregister_code(KC_LCTL);
+                }
             }
             return false;
     }
@@ -372,15 +392,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),                                               /*||*/
 
     [_NL] = LAYOUT_split_3x5_3(                      /*||*/
-        TO(_AL), KC_BSPC,   KC_UP,  KC_TAB, _______, /*||*/ _______,  N_PGUP,    REDO,  N_COPY, TO(_NR),
-         KC_ENT, KC_LEFT, KC_DOWN, KC_RGHT, _______, /*||*/ _______,  N_PGDN,    UNDO,  N_PSTE, TO(_AL),
+        TO(_AL), KC_BSPC,   KC_UP,  KC_TAB, _______, /*||*/ _______,  N_PGUP,    REDO,    COPY, TO(_NR),
+         KC_ENT, KC_LEFT, KC_DOWN, KC_RGHT, _______, /*||*/ _______,  N_PGDN,    UNDO,    PSTE, TO(_AL),
         _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
                           _______, _______, _______, /*||*/ _______, _______, _______
     ),                                               /*||*/
 
     [_NR] = LAYOUT_split_3x5_3(                      /*||*/
-        TO(_NL),  N_COPY,    REDO,  N_PGUP, _______, /*||*/ _______,  KC_TAB,   KC_UP, KC_BSPC, TO(_AL),
-        TO(_AL),  N_PSTE,    UNDO,  N_PGDN, _______, /*||*/ _______, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT,
+        TO(_NL),    COPY,    REDO,  N_PGUP, _______, /*||*/ _______,  KC_TAB,   KC_UP, KC_BSPC, TO(_AL),
+        TO(_AL),    PSTE,    UNDO,  N_PGDN, _______, /*||*/ _______, KC_LEFT, KC_DOWN, KC_RGHT,  KC_ENT,
         _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
                           _______, _______, _______, /*||*/ _______, _______, _______
     ),                                               /*||*/

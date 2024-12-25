@@ -14,5 +14,3 @@
 
 #define N_PGUP LALT_T(KC_PGUP)
 #define N_PGDN LSFT_T(KC_PGDN)
-#define N_COPY LGUI_T(COPY)
-#define N_PSTE LCTL_T(PSTE)
