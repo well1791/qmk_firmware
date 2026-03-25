@@ -19,179 +19,255 @@
 #include "os_detection.h"
 
 enum layers {
-    _AL = 0,
-    _NS,
-    _FF,
-    _NL,
-    _NR,
-    _ME,
-    _GO,
-    _MO,
-    _AL_QWERTY,
+    _ALPHA = 0,
+    _NUMSYM, // Numbers and Symbols
+    _FUNCT, // Functional
+    _NAV_L,
+    _NAV_R,
+    _MEDIA,
+    _GO, // GO = Go-to shortcuts
+    _MOUSE,
+    _QWERTY,
 };
 
-// ===========================================================
-//           | | | | |             | | | | |
-//           | |*|*|*|             |*|*|*| |
-const uint16_t PROGMEM na_spc[]  = {KC_LEFT, KC_DOWN, KC_RIGHT, COMBO_END};
-//           | |*|*|*|             |*|*|*| |
-//           | | | | |             | | | | |
-const uint16_t PROGMEM na_esc[]  = {KC_TAB, KC_UP, KC_BSPC, COMBO_END};
-//           | |*|*| |             | |*|*| |
-//           | | | | |             | | | | |
-const uint16_t PROGMEM na_del[]  = {KC_UP, KC_BSPC, COMBO_END};
-//           | |*| |*|             |*| |*| |
-//           | | | | |             | | | | |
-const uint16_t PROGMEM na_home[] = {KC_TAB, KC_BSPC, COMBO_END};
-//           | | | | |             | | | | |
-//           | |*| |*|             |*| |*| |
-const uint16_t PROGMEM na_end[]  = {KC_LEFT, KC_RIGHT, COMBO_END};
+/*
+ * ============================================================
+ * ==== Fingers => [I]ndex | [M]iddle | [R]ing   | [P]inky ====
+ * ====  Rows   => [H]ome  | [T]op    | [B]ottom | [S]ide  ====
+ * ============================================================
+ */
+
 
 // ===========================================================
-//           | | | | |                   | | | | |
-//           | | |*|*|                   |*|*| | |
-const uint16_t PROGMEM ns_2[]          = {KC_1, KC_3, COMBO_END};
-//           | | | | |                   | | | | |
-//           | |*|*| |                   | |*|*| |
-const uint16_t PROGMEM ns_4[]          = {KC_3, KC_5, COMBO_END};
-//           | | |*|*|                   |*|*| | |
-//           | | | | |                   | | | | |
-const uint16_t PROGMEM ns_7[]          = {KC_6, KC_8, COMBO_END};
-//           | |*|*| |                   | |*|*| |
-//           | | | | |                   | | | | |
-const uint16_t PROGMEM ns_9[]          = {KC_8, KC_0, COMBO_END};
-// const uint16_t PROGMEM ns_angbr_l[]    = {KC_7, KC_8, COMBO_END};
-// const uint16_t PROGMEM ns_angbr_r[]    = {KC_1, KC_2, COMBO_END};
-// const uint16_t PROGMEM ns_sqrbr_l[]    = {KC_8, KC_9, COMBO_END};
-// const uint16_t PROGMEM ns_sqrbr_r[]    = {KC_2, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_curbr_l[]    = {KC_7, KC_9, COMBO_END};
-// const uint16_t PROGMEM ns_curbr_r[]    = {KC_1, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_paren_l[]    = {KC_7, KC_0, COMBO_END};
-// const uint16_t PROGMEM ns_paren_r[]    = {KC_1, KC_QUOTE, COMBO_END};
-// const uint16_t PROGMEM ns_dot[]        = {KC_8, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_semicolon[]  = {KC_9, KC_2, COMBO_END};
-// const uint16_t PROGMEM ns_slash[]      = {KC_1, KC_9, COMBO_END};
-// const uint16_t PROGMEM ns_bslash[]     = {KC_7, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_hyphen[]     = {KC_1, KC_0, COMBO_END};
-// const uint16_t PROGMEM ns_underscore[] = {KC_7, KC_QUOTE, COMBO_END};
-// const uint16_t PROGMEM ns_comma[]      = {KC_1, KC_8, COMBO_END};
-// const uint16_t PROGMEM ns_equals[]     = {KC_9, KC_0, COMBO_END};
-// const uint16_t PROGMEM ns_dblquots[]   = {KC_3, KC_QUOTE, COMBO_END};
-// const uint16_t PROGMEM ns_qstn_mrk[]   = {KC_1, KC_2, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_excl_mrk[]   = {KC_7, KC_8, KC_9, COMBO_END};
-// const uint16_t PROGMEM ns_colon[]      = {KC_1, KC_8, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_asterisk[]   = {KC_1, KC_8, KC_9, COMBO_END};
-// const uint16_t PROGMEM ns_ampersand[]  = {KC_1, KC_2, KC_9, COMBO_END};
-// const uint16_t PROGMEM ns_pipe[]       = {KC_7, KC_8, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_backticks[]  = {KC_2, KC_3, KC_QUOTE, COMBO_END};
-// const uint16_t PROGMEM ns_tilde[]      = {KC_8, KC_9, KC_0, COMBO_END};
-// const uint16_t PROGMEM ns_dollar[]     = {KC_1, KC_2, KC_3, KC_QUOTE, COMBO_END};
-// const uint16_t PROGMEM ns_percentage[] = {KC_7, KC_8, KC_9, KC_0, COMBO_END};
-// const uint16_t PROGMEM ns_plus[]       = {KC_7, KC_2, KC_3, COMBO_END};
-// const uint16_t PROGMEM ns_hash[]       = {KC_8, KC_3, KC_QUOTE, COMBO_END};
-// const uint16_t PROGMEM ns_at[]         = {KC_9, KC_QUOTE, COMBO_END};
-// const uint16_t PROGMEM ns_circ[]       = {KC_7, KC_2, COMBO_END};
-
+// ==================     Alpha     ==========================
 // ===========================================================
-// Finger - [P]inky  | [R]ing | [M]iddle | [I]ndex
-//  Row   - [B]ottom | [T]op
-// ===========================================================
-//          | | | | |     hm_hr     | | | | |
-//          | |*|*| |     hm_hr     | |*|*| |
+//                     | | | | |    | | | | |
+//                     | |*|*| |    | |*|*| |
 const uint16_t PROGMEM al_hm_hr[] = {AL_HM, AL_HR, COMBO_END};
-//          | | | | |     hi_hr     | | | | |
-//          | |*| |*|     hi_hr     |*| |*| |
+//                     | | | | |    | | | | |
+//                     | |*| |*|    |*| |*| |
 const uint16_t PROGMEM al_hi_hr[] = {AL_HI, AL_HR, COMBO_END};
-//          | | | | |     hi_hm     | | | | |
-//          | | |*|*|     hi_hm     |*|*| | |
+//                     | | | | |    | | | | |
+//                     | | |*|*|    |*|*| | |
 const uint16_t PROGMEM al_hi_hm[] = {AL_HI, AL_HM, COMBO_END};
-//          | | | | |     hi_hp     | | | | |
-//          |*| | |*|     hi_hp     |*| | |*|
+//                     | | | | |    | | | | |
+//                     |*| | |*|    |*| | |*|
 const uint16_t PROGMEM al_hi_hp_l[] = {AL_HI, AL_HPL, COMBO_END};
 const uint16_t PROGMEM al_hi_hp_r[] = {AL_HI, AL_HPR, COMBO_END};
-
-// ===========================================================
-//          | |*| | |     hi_tr     | | |*| |
-//          | | | |*|     hi_tr     |*| | | |
+// ----------------------------------------------------------
+//                     | |*| | |    | | |*| |
+//                     | | | |*|    |*| | | |
 const uint16_t PROGMEM al_hi_tr[] = {AL_HI, AL_TR, COMBO_END};
-//          | |*| | |     hm_tr     | | |*| |
-//          | | |*| |     hm_tr     | |*| | |
-const uint16_t PROGMEM al_hm_tr[] = {AL_HM, AL_TR, COMBO_END};
-//          | | |*| |     hi_tm     | |*| | |
-//          | | | |*|     hi_tm     |*| | | |
+//                     | | |*| |    | |*| | |
+//                     | | | |*|    |*| | | |
 const uint16_t PROGMEM al_hi_tm[] = {AL_HI, AL_TM, COMBO_END};
-//          |*| | | |     hi_tp     | | | |*|
-//          | | | |*|     hi_tp     |*| | | |
+//                     |*| | | |    | | | |*|
+//                     | | | |*|    |*| | | |
 const uint16_t PROGMEM al_hi_tp[] = {AL_HI, AL_TP, COMBO_END};
-// ===========================================================
-//          | |*|*| |     tm_tr     | |*|*| |
-//          | | | | |     tm_tr     | | | | |
+//                     | |*| | |    | | |*| |
+//                     | | |*| |    | |*| | |
+const uint16_t PROGMEM al_hm_tr[] = {AL_HM, AL_TR, COMBO_END};
+// -----------------------------------------------------------
+//                     | |*|*| |    | |*|*| |
+//                     | | | | |    | | | | |
 const uint16_t PROGMEM al_tm_tr[] = {AL_TM, AL_TR, COMBO_END};
-//          | |*| |*|     ti_tr     |*| |*| |
-//          | | | | |     ti_tr     | | | | |
+//                     | |*| |*|    |*| |*| |
+//                     | | | | |    | | | | |
 const uint16_t PROGMEM al_ti_tr[] = {AL_TI, AL_TR, COMBO_END};
-//          | | |*|*|     ti_tm     |*|*| | |
-//          | | | | |     ti_tm     | | | | |
+//                     | | |*|*|    |*|*| | |
+//                     | | | | |    | | | | |
 const uint16_t PROGMEM al_ti_tm[] = {AL_TI, AL_TM, COMBO_END};
-//          |*| | |*|     ti_tp     |*| | |*|
-//          | | | | |     ti_tp     | | | | |
+//                      |*| | |*|   |*| | |*|
+//                      | | | | |   | | | | |
 const uint16_t PROGMEM al_ti_tp[] = {AL_TI, AL_TP, COMBO_END};
-// ===========================================================
-//          | | |*| |     tm_hr     | |*| | |
-//          | |*| | |     tm_hr     | | |*| |
+// -----------------------------------------------------------
+//                     | | |*| |    | |*| | |
+//                     | |*| | |    | | |*| |
 const uint16_t PROGMEM al_tm_hr[] = {AL_TM, AL_HR, COMBO_END};
-//          | | | |*|     ti_hr     |*| | | |
-//          | |*| | |     ti_hr     | | |*| |
+//                     | | | |*|    |*| | | |
+//                     | |*| | |    | | |*| |
 const uint16_t PROGMEM al_ti_hr[] = {AL_TI, AL_HR, COMBO_END};
-//          | | | |*|     ti_hm     |*| | | |
-//          | | |*| |     ti_hm     | |*| | |
+//                     | | | |*|    |*| | | |
+//                     | | |*| |    | |*| | |
 const uint16_t PROGMEM al_ti_hm[] = {AL_TI, AL_HM, COMBO_END};
-//          | | | |*|     ti_hp     |*| | | |
-//          |*| | | |     ti_hp     | | | |*|
+//                     | | | |*|    |*| | | |
+//                     |*| | | |    | | | |*|
 const uint16_t PROGMEM al_ti_hp_l[] = {AL_TI, AL_HPL, COMBO_END};
 const uint16_t PROGMEM al_ti_hp_r[] = {AL_TI, AL_HPR, COMBO_END};
-// ===========================================================
-//          | | | | |     hr_hp       | | | | |
-//          |*|*| | |     hr_hp       | | |*|*|
-const uint16_t PROGMEM al_hr_hp_l[] = {AL_HPL, AL_HR, COMBO_END};
-const uint16_t PROGMEM al_hr_hp_r[] = {AL_HPL, AL_HR, COMBO_END};
-//          |*|*| | |     tr_tp       | | |*|*|
-//          | | | | |     tr_tp       | | | | |
-const uint16_t PROGMEM al_tr_tp[]   = {AL_TP, AL_TR, COMBO_END};
-//          | |*| | |     tr_hp       | | |*| |
-//          |*| | | |     tr_hp       | | | |*|
-const uint16_t PROGMEM al_tr_hp_l[] = {AL_HPL, AL_TR, COMBO_END};
-const uint16_t PROGMEM al_tr_hp_r[] = {AL_HPL, AL_TR, COMBO_END};
-// ===========================================================
-//          | | | | |     hi_hm_hr     | | | | |
-//          | |*|*|*|     hi_hm_hr     |*|*|*| |
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     | |*|*|*|       |*|*|*| |
 const uint16_t PROGMEM al_hi_hm_hr[] = {AL_HI, AL_HM, AL_HR, COMBO_END};
-//          | |*|*|*|     ti_tm_tr     |*|*|*| |
-//          | | | | |     ti_tm_tr     | | | | |
+//                     | |*|*|*|       |*|*|*| |
+//                     | | | | |       | | | | |
 const uint16_t PROGMEM al_ti_tm_tr[] = {AL_TI, AL_TM, AL_TR, COMBO_END};
-//          | | |*| |     hi_tm_hr     | |*| | |
-//          | |*| |*|     hi_tm_hr     |*| |*| |
+//                     | | |*| |       | |*| | |
+//                     | |*| |*|       |*| |*| |
 const uint16_t PROGMEM al_hi_tm_hr[] = {AL_HI, AL_TM, AL_HR, COMBO_END};
-//          | |*|*| |     hi_tm_tr     | |*|*| |
-//          | | | |*|     hi_tm_tr     |*| | | |
+//                     | |*|*| |       | |*|*| |
+//                     | | | |*|       |*| | | |
 const uint16_t PROGMEM al_hi_tm_tr[] = {AL_HI, AL_TM, AL_TR, COMBO_END};
-//          | |*| | |     hi_hm_tr     | | |*| |
-//          | | |*|*|     hi_hm_tr     |*|*| | |
+//                     | |*| | |       | | |*| |
+//                     | | |*|*|       |*|*| | |
 const uint16_t PROGMEM al_hi_hm_tr[] = {AL_HI, AL_HM, AL_TR, COMBO_END};
-//          | | |*|*|     ti_tm_hr     |*|*| | |
-//          | |*| | |     ti_tm_hr     | | |*| |
+//                     | | |*|*|       |*|*| | |
+//                     | |*| | |       | | |*| |
 const uint16_t PROGMEM al_ti_tm_hr[] = {AL_TI, AL_TM, AL_HR, COMBO_END};
-//          | | | |*|     ti_hm_br     |*| | | |
-//          | |*|*| |     ti_hm_br     | |*|*| |
-const uint16_t PROGMEM al_ti_hm_br[] = {AL_TI, AL_HM, AL_HR, COMBO_END};
-// ===========================================================
-//          | | | | |     hi_hr_hm_hp     | | | | |
-//          |*|*|*|*|     hi_hr_hm_hp     |*|*|*|*|
+//                     | | | |*|       |*| | | |
+//                     | |*|*| |       | |*|*| |
+const uint16_t PROGMEM al_ti_hm_hr[] = {AL_TI, AL_HM, AL_HR, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |          | | | | |
+//                     |*|*|*|*|          |*|*|*|*|
 const uint16_t PROGMEM al_hi_hr_hm_hp_l[] = {AL_HI, AL_HR, AL_HM, AL_HPL, COMBO_END};
 const uint16_t PROGMEM al_hi_hr_hm_hp_r[] = {AL_HI, AL_HR, AL_HM, AL_HPR, COMBO_END};
-//          |*|*|*|*|     ti_tr_tm_tp     |*|*|*|*|
-//          | | | | |     ti_tr_tm_tp     | | | | |
+//                     |*|*|*|*|          |*|*|*|*|
+//                     | | | | |          | | | | |
 const uint16_t PROGMEM al_ti_tr_tm_tp[] = {AL_TI, AL_TR, AL_TM, AL_TP, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     | | |*| |       | |*| | |
+//                         | |*|       |*| |
+const uint16_t PROGMEM al_bi_hm[] = {AL_BI, AL_HM, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         |*| |       | |*|
+const uint16_t PROGMEM al_bm_hr[] = {AL_BM, AL_HR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         | |*|       |*| |
+const uint16_t PROGMEM al_bi_hr[] = {AL_BI, AL_HR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | | | | |       | | | | |
+//                         |*|*|       |*|*|
+const uint16_t PROGMEM al_bi_bm[] = {AL_BI, AL_BM, COMBO_END};
+//                     | | | | |       | | | | |
+//                     |*| | | |       | | | |*|
+//                         | |*|       |*| |
+const uint16_t PROGMEM al_bi_hp_l[] = {AL_BI, AL_HPL, COMBO_END};
+const uint16_t PROGMEM al_bi_hp_r[] = {AL_BI, AL_HPR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         |*|*|       |*|*|
+const uint16_t PROGMEM al_bi_bm_hr[] = {AL_BI, AL_BM, AL_HR, COMBO_END};
+
+// ===========================================================
+// ==================  Nums n Syms  ==========================
+// ===========================================================
+//                     | | | | |    | | | | |
+//                     | |*|*| |    | |*|*| |
+const uint16_t PROGMEM ns_hm_hr[] = {NS_HM, NS_HR, COMBO_END};
+//                     | | | | |    | | | | |
+//                     | |*| |*|    |*| |*| |
+const uint16_t PROGMEM ns_hi_hr[] = {NS_HI, NS_HR, COMBO_END};
+//                     | | | | |    | | | | |
+//                     | | |*|*|    |*|*| | |
+const uint16_t PROGMEM ns_hi_hm[] = {NS_HI, NS_HM, COMBO_END};
+//                     | | | | |    | | | | |
+//                     |*| | |*|    |*| | |*|
+const uint16_t PROGMEM ns_hi_hp[] = {NS_HI, NS_HP, COMBO_END};
+// ----------------------------------------------------------
+//                     | |*| | |    | | |*| |
+//                     | | | |*|    |*| | | |
+const uint16_t PROGMEM ns_hi_tr[] = {NS_HI, NS_TR, COMBO_END};
+//                     | | |*| |    | |*| | |
+//                     | | | |*|    |*| | | |
+const uint16_t PROGMEM ns_hi_tm[] = {NS_HI, NS_TM, COMBO_END};
+//                     |*| | | |    | | | |*|
+//                     | | | |*|    |*| | | |
+const uint16_t PROGMEM ns_hi_tp[] = {NS_HI, NS_TP, COMBO_END};
+//                     | |*| | |    | | |*| |
+//                     | | |*| |    | |*| | |
+const uint16_t PROGMEM ns_hm_tr[] = {NS_HM, NS_TR, COMBO_END};
+// -----------------------------------------------------------
+//                     | |*|*| |    | |*|*| |
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_tm_tr[] = {NS_TM, NS_TR, COMBO_END};
+//                     | |*| |*|    |*| |*| |
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_ti_tr[] = {NS_TI, NS_TR, COMBO_END};
+//                     | | |*|*|    |*|*| | |
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_ti_tm[] = {NS_TI, NS_TM, COMBO_END};
+//                      |*| | |*|   |*| | |*|
+//                      | | | | |   | | | | |
+const uint16_t PROGMEM ns_ti_tp[] = {NS_TI, NS_TP, COMBO_END};
+// -----------------------------------------------------------
+//                     | | |*| |    | |*| | |
+//                     | |*| | |    | | |*| |
+const uint16_t PROGMEM ns_tm_hr[] = {NS_TM, NS_HR, COMBO_END};
+//                     | | | |*|    |*| | | |
+//                     | |*| | |    | | |*| |
+const uint16_t PROGMEM ns_ti_hr[] = {NS_TI, NS_HR, COMBO_END};
+//                     | | | |*|    |*| | | |
+//                     | | |*| |    | |*| | |
+const uint16_t PROGMEM ns_ti_hm[] = {NS_TI, NS_HM, COMBO_END};
+//                     | | | |*|    |*| | | |
+//                     |*| | | |    | | | |*|
+const uint16_t PROGMEM ns_ti_hp[] = {NS_TI, NS_HP, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |    | | | | |
+//                     |*|*| | |    | | |*|*|
+const uint16_t PROGMEM ns_hr_hp[] = {NS_HR, NS_HP, COMBO_END};
+//                     |*|*| | |    | | |*|*|
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_tr_tp[] = {NS_TR, NS_TP, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     | |*|*|*|       |*|*|*| |
+const uint16_t PROGMEM ns_hi_hm_hr[] = {NS_HI, NS_HM, NS_HR, COMBO_END};
+//                     | |*|*|*|       |*|*|*| |
+//                     | | | | |       | | | | |
+const uint16_t PROGMEM ns_ti_tm_tr[] = {NS_TI, NS_TM, NS_TR, COMBO_END};
+//                     | | |*| |       | |*| | |
+//                     | |*| |*|       |*| |*| |
+const uint16_t PROGMEM ns_hi_tm_hr[] = {NS_HI, NS_TM, NS_HR, COMBO_END};
+//                     | |*|*| |       | |*|*| |
+//                     | | | |*|       |*| | | |
+const uint16_t PROGMEM ns_hi_tm_tr[] = {NS_HI, NS_TM, NS_TR, COMBO_END};
+//                     | |*| | |       | | |*| |
+//                     | | |*|*|       |*|*| | |
+const uint16_t PROGMEM ns_hi_hm_tr[] = {NS_HI, NS_HM, NS_TR, COMBO_END};
+//                     | | |*|*|       |*|*| | |
+//                     | |*| | |       | | |*| |
+const uint16_t PROGMEM ns_ti_tm_hr[] = {NS_TI, NS_TM, NS_HR, COMBO_END};
+//                     | | | |*|       |*| | | |
+//                     | |*|*| |       | |*|*| |
+const uint16_t PROGMEM ns_ti_hm_hr[] = {NS_TI, NS_HM, NS_HR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     |*|*|*| |       | |*|*|*|
+const uint16_t PROGMEM ns_hm_hr_hp[] = {NS_HM, NS_HR, NS_HP, COMBO_END};
+//                     |*|*|*| |       | |*|*|*|
+//                     | | | | |       | | | | |
+const uint16_t PROGMEM ns_tm_tr_tp[] = {NS_TM, NS_TR, NS_TP, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     | | |*| |       | |*| | |
+//                         | |*|       |*| |
+const uint16_t PROGMEM ns_bi_hm[] = {NS_BI, NS_HM, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         |*| |       | |*|
+const uint16_t PROGMEM ns_bm_hr[] = {NS_BM, NS_HR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         | |*|       |*| |
+const uint16_t PROGMEM ns_bi_hr[] = {NS_BI, NS_HR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     |*| | | |       | | | |*|
+//                         | |*|       |*| |
+const uint16_t PROGMEM ns_bi_hp[] = {NS_BI, NS_HP, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | | | | |       | | | | |
+//                         |*|*|       |*|*|
+const uint16_t PROGMEM ns_bi_bm[] = {NS_BI, NS_BM, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         |*|*|       |*|*|
+const uint16_t PROGMEM ns_bi_bm_hr[] = {NS_BI, NS_BM, NS_HR, COMBO_END};
+
+// ===========================================================
+// ==================  Functional   ==========================
 // ===========================================================
 //           | | | | |           | | | | |
 //           | | |*|*|           |*|*| | |
@@ -204,89 +280,112 @@ const uint16_t PROGMEM ff_f4[] = {KC_F3, KC_F5, COMBO_END};
 const uint16_t PROGMEM ff_f7[] = {KC_F6, KC_F8, COMBO_END};
 //           | |*|*| |           | |*|*| |
 //           | | | | |           | | | | |
-const uint16_t PROGMEM ff_f9[] = {KC_F8, KC_F19, COMBO_END};
+const uint16_t PROGMEM ff_f9[] = {KC_F8, KC_F10, COMBO_END};
+
+// ===========================================================
+// ==================  Navigation   ==========================
+// ===========================================================
+//           | | | | |             | | | | |
+//           | |*| |*|             |*| |*| |
+const uint16_t PROGMEM na_hi_hr[]  = {NA_MV_LT, NA_MV_RT, COMBO_END};
+//           | |*| |*|             |*| |*| |
+//           | | | | |             | | | | |
+const uint16_t PROGMEM na_ti_tr[] = {NA_MV_TI, NA_MV_TR, COMBO_END};
+//           | |*|*| |             | |*|*| |
+//           | | | | |             | | | | |
+const uint16_t PROGMEM na_tm_tr[]  = {NA_MV_TM, NA_MV_TR, COMBO_END};
+//           | | | | |             | | | | |
+//           | |*|*|*|             |*|*|*| |
+const uint16_t PROGMEM na_hi_hm_hr[]  = {NA_MV_LT, NA_MV_HM,  NA_MV_RT, COMBO_END};
+//           | |*|*|*|             |*|*|*| |
+//           | | | | |             | | | | |
+const uint16_t PROGMEM na_ti_tm_tr[]  = {NA_MV_TI, NA_MV_TM, NA_MV_TR, COMBO_END};
 
 
 combo_t key_combos[] = {
-    // Letter Chords -- right hand
-    // ===============================================
-    COMBO(al_hm_hr, KC_T),
-    COMBO(al_hi_hr, KC_L),
-    COMBO(al_hi_hm, KC_D),
-    COMBO(al_hi_tr, KC_C),
-    COMBO(al_tm_tr, KC_U),
-    COMBO(al_ti_tr, KC_V),
-    COMBO(al_ti_tm, KC_Y),
-    COMBO(al_hi_hp_l, KC_G),
-    COMBO(al_hi_hp_r, KC_G),
-    COMBO(al_hi_tp, KC_B),
-    COMBO(al_ti_tp, KC_W),
+    // ===========================================================
+    // ==================     Alpha     ==========================
+    // ===========================================================
+    COMBO(al_hm_hr, KC_N),
+    COMBO(al_hi_hr, KC_S),
+    COMBO(al_hi_hm, KC_R),
+    COMBO(al_hi_tr, KC_T),
+    COMBO(al_tm_tr, KC_D),
+    COMBO(al_ti_tr, KC_L),
+    COMBO(al_ti_tm, KC_C),
+    COMBO(al_hi_hp_l, KC_P),
+    COMBO(al_hi_hp_r, KC_P),
+    COMBO(al_hi_tp, KC_Y),
+    COMBO(al_ti_tp, KC_B),
     COMBO(al_tm_hr, KC_F),
-    COMBO(al_hi_tm, KC_P),
+    COMBO(al_hm_tr, KC_V),
+    COMBO(al_hi_tm, KC_W),
     COMBO(al_ti_hr, KC_Q),
-    COMBO(al_hm_tr, KC_X),
-    COMBO(al_ti_hm, KC_J),
-    // ===============================================
+    COMBO(al_ti_hm, KC_X),
+    // -----------------------------------------------
     COMBO(al_hi_hm_hr, KC_SPACE),
     COMBO(al_ti_tm_tr, KC_ESCAPE),
-    //COMBO(al_hi_tm_tr, KC_ENT),
-    //COMBO(al_hi_hm_tr, KC_BSPC),
-    COMBO(al_ti_tr_tm_tp, KC_CAPS),
-    COMBO(al_hi_tm_hr, OSL(_NS)),
-    COMBO(al_ti_tm_hr, OSL(_FF)),
-    COMBO(al_hr_hp_l, OSL(_GO)),
-    COMBO(al_hr_hp_r, OSL(_GO)),
-    COMBO(al_tr_tp, OSL(_ME)),
+    COMBO(al_hi_tm_hr, OSL(_NUMSYM)),
+    COMBO(al_ti_hm_hr, OSL(_FUNCT)),
+    COMBO(al_hi_tm_tr, OSL(_GO)),
+    COMBO(al_hi_hm_tr, OSL(_MEDIA)),
+    // COMBO(???, OSL(_MOUSE)),
+    COMBO(al_bi_bm, OSM(MOD_LSFT)),
+    COMBO(al_bi_hr, OSM(MOD_LCTL)),
+    COMBO(al_bi_hm, OSM(MOD_LALT)),
+    COMBO(al_bi_hp_l, OSM(MOD_LGUI)),
+    COMBO(al_bi_hp_r, OSM(MOD_LGUI)),
 
-    // ===============================================
-    COMBO(na_spc, KC_SPACE),
-    COMBO(na_esc, KC_ESCAPE),
-    COMBO(na_del, KC_DELETE),
-    COMBO(na_home, KC_HOME),
-    COMBO(na_end, KC_END),
+    // ===========================================================
+    // ==================  Nums N Syms  ==========================
+    // ===========================================================
+    COMBO(ns_hi_hm, KC_2),
+    COMBO(ns_hm_hr, KC_4),
+    COMBO(ns_ti_tm, KC_7),
+    COMBO(ns_tm_tr, KC_9),
+    COMBO(ns_hi_hr, KC_LPRN), // (
+    COMBO(ns_ti_tr, KC_RPRN), // )
+    COMBO(ns_hi_hp, KC_LBRC), // [
+    COMBO(ns_ti_tp, KC_RBRC), // ]
+    COMBO(ns_bi_hm, KC_LCBR), // {
+    COMBO(ns_bm_hr, KC_RCBR), // }
+    COMBO(ns_bi_hr, KC_LABK), // <
+    COMBO(ns_bi_hp, KC_RABK), // >
+    COMBO(ns_hi_tp, KC_MINUS),
+    COMBO(ns_ti_hp, KC_UNDERSCORE),
+    COMBO(ns_hi_tr, KC_SLASH),
+    COMBO(ns_ti_hr, KC_BACKSLASH),
+    COMBO(ns_hi_tm, KC_COMMA),
+    COMBO(ns_tm_hr, KC_DOT),
+    COMBO(ns_hr_hp, KC_DQT),
+    COMBO(ns_tr_tp, KC_PERCENT),
+    COMBO(ns_hi_hm_hr, KC_QUESTION),
+    COMBO(ns_ti_tm_tr, KC_EXCLAIM),
+    COMBO(ns_hi_tm_hr, KC_SEMICOLON),
+    COMBO(ns_hi_tm_tr, KC_COLON),
+    COMBO(ns_hi_hm_tr, KC_AMPERSAND),
+    COMBO(ns_ti_tm_hr, KC_PIPE),
+    COMBO(ns_hm_hr_hp, KC_GRAVE),
+    COMBO(ns_tm_tr_tp, KC_TILDE),
+    COMBO(ns_bi_bm, KC_EQUAL),
+    COMBO(ns_bi_bm_hr, KC_DOLLAR),
 
-    // ===============================================
-    COMBO(ns_2, KC_2),
-    COMBO(ns_4, KC_4),
-    COMBO(ns_7, KC_7),
-    COMBO(ns_9, KC_9),
-    // COMBO(ns_paren_r, KC_RPRN),
-    // COMBO(ns_paren_l, KC_LPRN),
-    // COMBO(ns_sqrbr_r, KC_RBRC),
-    // COMBO(ns_sqrbr_l, KC_LBRC),
-    // COMBO(ns_curbr_r, KC_RCBR),
-    // COMBO(ns_curbr_l, KC_LCBR),
-    // COMBO(ns_angbr_l, KC_LABK),
-    // COMBO(ns_angbr_r, KC_RABK),
-    // COMBO(ns_dot, KC_DOT),
-    // COMBO(ns_semicolon, KC_SEMICOLON),
-    // COMBO(ns_slash, KC_SLASH),
-    // COMBO(ns_bslash, KC_BACKSLASH),
-    // COMBO(ns_hyphen, KC_MINUS),
-    // COMBO(ns_underscore, KC_UNDERSCORE),
-    // COMBO(ns_comma, KC_COMMA),
-    // COMBO(ns_equals, KC_EQUAL),
-    // COMBO(ns_dblquots, KC_DQT),
-    // COMBO(ns_qstn_mrk, KC_QUESTION),
-    // COMBO(ns_excl_mrk, KC_EXCLAIM),
-    // COMBO(ns_colon, KC_COLON),
-    // COMBO(ns_asterisk, KC_ASTERISK),
-    // COMBO(ns_ampersand, KC_AMPERSAND),
-    // COMBO(ns_pipe, KC_PIPE),
-    // COMBO(ns_backticks, KC_GRAVE),
-    // COMBO(ns_tilde, KC_TILDE),
-    // COMBO(ns_dollar, KC_DOLLAR),
-    // COMBO(ns_percentage, KC_PERCENT),
-    // COMBO(ns_plus, KC_PLUS),
-    // COMBO(ns_hash, KC_HASH),
-    // COMBO(ns_at, KC_AT),
-    // COMBO(ns_circ, KC_CIRC),
-
-    // ===============================================
+    // ===========================================================
+    // ==================  Functional   ==========================
+    // ===========================================================
     COMBO(ff_f2, KC_F2),
     COMBO(ff_f4, KC_F4),
     COMBO(ff_f7, KC_F7),
     COMBO(ff_f9, KC_F9),
+
+    // ===========================================================
+    // ==================  Navigation   ==========================
+    // ===========================================================
+    COMBO(na_hi_hr, KC_END),
+    COMBO(na_ti_tr, KC_HOME),
+    COMBO(na_tm_tr, KC_DELETE),
+    COMBO(na_ti_tm_tr, KC_ESCAPE),
+    COMBO(na_hi_hm_hr, KC_SPACE),
 };
 
 enum custom_keycodes {
@@ -380,49 +479,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_AL] = LAYOUT_split_3x5_3(
+    [_ALPHA] = LAYOUT_split_3x5_3(
               AL_TP,   AL_TR,   AL_TM,   AL_TI, _______, /*||*/ _______,   AL_TI,   AL_TM,   AL_TR,   AL_TP,
              AL_HPL,   AL_HR,   AL_HM,   AL_HI,   AL_SI, /*||*/   AL_SI,   AL_HI,   AL_HM,   AL_HR,  AL_HPR,
             _______, _______,   AL_BM,   AL_BI, _______, /*||*/ _______,   AL_BI,   AL_BM, _______, _______,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
 
-    // TODO: add the rest of symbols and combos
-    [_NS] = LAYOUT_split_3x5_3(
-            _______,    KC_0,    KC_8,    KC_6, _______, /*||*/ _______,    KC_6,    KC_8,    KC_0, _______,
-            _______,    KC_5,    KC_3,    KC_1, _______, /*||*/ _______,    KC_1,    KC_3,    KC_5, _______,
-            _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+    [_NUMSYM] = LAYOUT_split_3x5_3(
+              NS_TP,   NS_TR,   NS_TM,   NS_TI, _______, /*||*/ _______,   NS_TI,   NS_TM,   NS_TR,   NS_TP,
+              NS_HP,   NS_HR,   NS_HM,   NS_HI,   NS_SI, /*||*/   NS_SI,   NS_HI,   NS_HM,   NS_HR,   NS_HP,
+            _______, _______,   NS_BM,   NS_BI, _______, /*||*/ _______,   NS_BI,   NS_BM, _______, _______,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
 
-    [_FF] = LAYOUT_split_3x5_3(
+    [_FUNCT] = LAYOUT_split_3x5_3(
              KC_F11,  KC_F10,   KC_F8,   KC_F6, _______, /*||*/ _______,   KC_F6,   KC_F8,  KC_F10,  KC_F11,
              KC_F12,   KC_F5,   KC_F3,   KC_F1, _______, /*||*/ _______,   KC_F1,   KC_F3,   KC_F5,  KC_F12,
             _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
 
-    [_NL] = LAYOUT_split_3x5_3(
-            TO(_AL), KC_BSPC,   KC_UP,  KC_TAB, _______, /*||*/ _______, NA_PGUP,  KC_TAB, KC_LGUI,
-    TO(_NR), KC_ENT, KC_LEFT, KC_DOWN, KC_RGHT, _______, /*||*/ _______, NA_PGDN,  KC_ESC, KC_LCTL, TO(_AL),
-            _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
-                              _______, _______, _______, /*||*/ _______, _______, _______
+    [_NAV_L] = LAYOUT_split_3x5_3(
+        NA_MV_TP, NA_MV_TR, NA_MV_TM, NA_MV_TI, _______, /*||*/ _______, NA_MD_TI, NA_MD_TM, NA_MD_TR, TO(_NAV_R),
+        NA_MV_HP, NA_MV_LT, NA_MV_HM, NA_MV_RT, _______, /*||*/ _______, NA_MD_HI, NA_MD_HM, NA_MD_HR,   NA_MD_HP,
+         _______,  _______,  _______,  _______, _______, /*||*/ _______,  _______,  _______,  _______,    _______,
+                             _______,  _______, _______, /*||*/ _______,  _______,  _______
     ),
 
-    [_NR] = LAYOUT_split_3x5_3(
-             TO(_NL), KC_LGUI, KC_TAB, NA_PGUP, _______, /*||*/ _______, KC_TAB ,   KC_UP, KC_BSPC,
-    TO(_AL), TO(_AL), KC_LCTL, KC_ESC, NA_PGDN, _______, /*||*/ _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_ENT,
-            _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
-                              _______, _______, _______, /*||*/ _______, _______, _______
+    [_NAV_R] = LAYOUT_split_3x5_3(
+      TO(_NAV_L), NA_MD_TR, NA_MD_TM, NA_MD_TI, _______, /*||*/ _______, NA_MV_TI, NA_MV_TM, NA_MV_TR, NA_MV_TP,
+        NA_MD_HP, NA_MD_HR, NA_MD_HM, NA_MD_HI, _______, /*||*/ _______, NA_MV_LT, NA_MV_HM, NA_MV_RT, NA_MV_HP,
+         _______,  _______,   _______, _______, _______, /*||*/ _______,  _______,  _______,  _______,  _______,
+                              _______, _______, _______, /*||*/ _______,  _______,  _______
     ),
 
-    [_ME] = LAYOUT_split_3x5_3(
+    [_MEDIA] = LAYOUT_split_3x5_3(
             KC_BRIU, KC_MPRV, KC_VOLU, KC_MUTE, _______, /*||*/ _______, KC_MUTE, KC_VOLU, KC_MPRV, KC_BRIU,
             KC_BRID, KC_MNXT, KC_VOLD, KC_MPLY, _______, /*||*/ _______, KC_MPLY, KC_VOLD, KC_MNXT, KC_BRID,
             _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
 
+    // TODO: finish layout
     [_GO] = LAYOUT_split_3x5_3(
            ALT_9, ALT_GRV, CTL_PGUP, CTL_SFT_T, _______, /*||*/ _______, CTL_SFT_T, CTL_PGUP, ALT_GRV,   ALT_9,
            ALT_1, CTL_TAB, CTL_PGDN,     CTL_W, _______, /*||*/ _______,     CTL_W, CTL_PGDN, CTL_TAB,   ALT_1,
@@ -430,19 +529,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _______,   _______, _______, /*||*/ _______,   _______,  _______
     ),
 
-    // TODO: mouse actions
-    [_MO] = LAYOUT_split_3x5_3(
+    // TODO: finish layout
+    [_MOUSE] = LAYOUT_split_3x5_3(
             _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
             _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
             _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
 
-    // TODO: finish layout and avoid combos
-    [_AL_QWERTY] = LAYOUT_split_3x5_3(
-                           KC_Q, KC_W, KC_E, KC_R, KC_T, /*||*/ KC_Y, KC_U, KC_I, KC_O, KC_P,
-                  LT(_NR, KC_A), KC_S, KC_D, KC_F, KC_G, /*||*/ KC_H, KC_J, KC_K, KC_L, LT(_NR, KC_SEMICOLON),
-                           KC_Z, KC_X, KC_C, KC_V, KC_B, /*||*/ KC_N, KC_M, KC_COMMA, KC_DOT, KC_SLASH,
+    // TODO: finish layout and allow just one combo to go back to the main alpha layer
+    [_QWERTY] = LAYOUT_split_3x5_3(
+                        KC_Q, KC_W, KC_E, KC_R,    KC_T, /*||*/    KC_Y, KC_U,     KC_I,   KC_O,         KC_P,
+                        KC_A, KC_S, KC_D, KC_F,    KC_G, /*||*/    KC_H, KC_J,     KC_K,   KC_L, KC_SEMICOLON,
+                        KC_Z, KC_X, KC_C, KC_V,    KC_B, /*||*/    KC_N, KC_M, KC_COMMA, KC_DOT,     KC_SLASH,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
 };
