@@ -355,8 +355,8 @@ combo_t key_combos[] = {
     COMBO(ns_ti_hp, KC_UNDERSCORE),
     COMBO(ns_hi_tr, KC_SLASH),
     COMBO(ns_ti_hr, KC_BACKSLASH),
-    COMBO(ns_hi_tm, KC_COMMA),
-    COMBO(ns_tm_hr, KC_DOT),
+    COMBO(ns_hi_tm, KC_DOT),
+    COMBO(ns_tm_hr, KC_COMMA),
     COMBO(ns_hr_hp, KC_DQT),
     COMBO(ns_tr_tp, KC_PERCENT),
     COMBO(ns_hi_hm_hr, KC_QUESTION),
@@ -367,7 +367,7 @@ combo_t key_combos[] = {
     COMBO(ns_ti_tm_hr, KC_PIPE),
     COMBO(ns_hm_hr_hp, KC_GRAVE),
     COMBO(ns_tm_tr_tp, KC_TILDE),
-    COMBO(ns_bi_bm, KC_EQUAL),
+    COMBO(ns_bi_bm, KC_HASH),
     COMBO(ns_bi_bm_hr, KC_DOLLAR),
 
     // ===========================================================

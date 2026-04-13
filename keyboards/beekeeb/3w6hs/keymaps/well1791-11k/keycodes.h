@@ -33,11 +33,11 @@
 #define NS_TM KC_8
 #define NS_TR KC_0
 #define NS_TP KC_ASTERISK
-#define NS_BI KC_PLUS
-#define NS_BM KC_HASH
+#define NS_BI KC_EQUAL
+#define NS_BM KC_PLUS
 
 // ===== NA_ - Navigation =====
-// ----- Movement
+// ----- MV_ - Movement
 #define NA_MV_LT KC_LEFT
 #define NA_MV_HM KC_DOWN
 #define NA_MV_RT KC_RIGHT
@@ -46,7 +46,7 @@
 #define NA_MV_TM KC_UP
 #define NA_MV_TR KC_BSPC
 #define NA_MV_TP TO(_ALPHA)
-// ----- Modifiers
+// ----- MD_ - Modifiers
 #define NA_MD_HI LSFT_T(KC_PGDN)
 #define NA_MD_HM KC_ESC
 #define NA_MD_HR KC_LCTL
