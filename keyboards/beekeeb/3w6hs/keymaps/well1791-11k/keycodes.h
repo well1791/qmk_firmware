@@ -28,7 +28,8 @@
 #define NS_HI KC_1
 #define NS_HM KC_3
 #define NS_HR KC_5
-#define NS_HP KC_QUOTE
+#define NS_HPL LT(_NAV_R, KC_QUOTE)
+#define NS_HPR LT(_NAV_L, KC_QUOTE)
 #define NS_TI KC_6
 #define NS_TM KC_8
 #define NS_TR KC_0

@@ -165,7 +165,8 @@ const uint16_t PROGMEM ns_hi_hr[] = {NS_HI, NS_HR, COMBO_END};
 const uint16_t PROGMEM ns_hi_hm[] = {NS_HI, NS_HM, COMBO_END};
 //                     | | | | |    | | | | |
 //                     |*| | |*|    |*| | |*|
-const uint16_t PROGMEM ns_hi_hp[] = {NS_HI, NS_HP, COMBO_END};
+const uint16_t PROGMEM ns_hi_hpl[] = {NS_HI, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_hi_hpr[] = {NS_HI, NS_HPR, COMBO_END};
 // ----------------------------------------------------------
 //                     | |*| | |    | | |*| |
 //                     | | | |*|    |*| | | |
@@ -204,11 +205,13 @@ const uint16_t PROGMEM ns_ti_hr[] = {NS_TI, NS_HR, COMBO_END};
 const uint16_t PROGMEM ns_ti_hm[] = {NS_TI, NS_HM, COMBO_END};
 //                     | | | |*|    |*| | | |
 //                     |*| | | |    | | | |*|
-const uint16_t PROGMEM ns_ti_hp[] = {NS_TI, NS_HP, COMBO_END};
+const uint16_t PROGMEM ns_ti_hpl[] = {NS_TI, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_ti_hpr[] = {NS_TI, NS_HPR, COMBO_END};
 // -----------------------------------------------------------
 //                     | | | | |    | | | | |
 //                     |*|*| | |    | | |*|*|
-const uint16_t PROGMEM ns_hr_hp[] = {NS_HR, NS_HP, COMBO_END};
+const uint16_t PROGMEM ns_hr_hpl[] = {NS_HR, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_hr_hpr[] = {NS_HR, NS_HPR, COMBO_END};
 //                     |*|*| | |    | | |*|*|
 //                     | | | | |    | | | | |
 const uint16_t PROGMEM ns_tr_tp[] = {NS_TR, NS_TP, COMBO_END};
@@ -236,7 +239,8 @@ const uint16_t PROGMEM ns_ti_tm_hr[] = {NS_TI, NS_TM, NS_HR, COMBO_END};
 const uint16_t PROGMEM ns_ti_hm_hr[] = {NS_TI, NS_HM, NS_HR, COMBO_END};
 //                     | | | | |       | | | | |
 //                     |*|*|*| |       | |*|*|*|
-const uint16_t PROGMEM ns_hm_hr_hp[] = {NS_HM, NS_HR, NS_HP, COMBO_END};
+const uint16_t PROGMEM ns_hm_hr_hpl[] = {NS_HM, NS_HR, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_hm_hr_hpr[] = {NS_HM, NS_HR, NS_HPR, COMBO_END};
 //                     |*|*|*| |       | |*|*|*|
 //                     | | | | |       | | | | |
 const uint16_t PROGMEM ns_tm_tr_tp[] = {NS_TM, NS_TR, NS_TP, COMBO_END};
@@ -256,7 +260,8 @@ const uint16_t PROGMEM ns_bi_hr[] = {NS_BI, NS_HR, COMBO_END};
 //                     | | | | |       | | | | |
 //                     |*| | | |       | | | |*|
 //                         | |*|       |*| |
-const uint16_t PROGMEM ns_bi_hp[] = {NS_BI, NS_HP, COMBO_END};
+const uint16_t PROGMEM ns_bi_hpl[] = {NS_BI, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_bi_hpr[] = {NS_BI, NS_HPR, COMBO_END};
 //                     | | | | |       | | | | |
 //                     | | | | |       | | | | |
 //                         |*|*|       |*|*|
@@ -330,11 +335,11 @@ combo_t key_combos[] = {
     COMBO(al_hi_tm_tr, OSL(_GO)),
     COMBO(al_hi_hm_tr, OSL(_MEDIA)),
     // COMBO(???, OSL(_MOUSE)),
-    COMBO(al_bi_bm, OSM(MOD_LSFT)),
+    COMBO(al_bi_bm, OSM(MOD_LGUI)),
     COMBO(al_bi_hr, OSM(MOD_LCTL)),
-    COMBO(al_bi_hm, OSM(MOD_LALT)),
-    COMBO(al_bi_hp_l, OSM(MOD_LGUI)),
-    COMBO(al_bi_hp_r, OSM(MOD_LGUI)),
+    COMBO(al_bi_hm, OSM(MOD_LSFT)),
+    COMBO(al_bi_hp_l, OSM(MOD_LALT)),
+    COMBO(al_bi_hp_r, OSM(MOD_LALT)),
 
     // ===========================================================
     // ==================  Nums N Syms  ==========================
@@ -345,19 +350,23 @@ combo_t key_combos[] = {
     COMBO(ns_tm_tr, KC_9),
     COMBO(ns_hi_hr, KC_LPRN), // (
     COMBO(ns_ti_tr, KC_RPRN), // )
-    COMBO(ns_hi_hp, KC_LBRC), // [
+    COMBO(ns_hi_hpl, KC_LBRC), // [
+    COMBO(ns_hi_hpr, KC_LBRC), // [
     COMBO(ns_ti_tp, KC_RBRC), // ]
     COMBO(ns_bi_hm, KC_LCBR), // {
     COMBO(ns_bm_hr, KC_RCBR), // }
     COMBO(ns_bi_hr, KC_LABK), // <
-    COMBO(ns_bi_hp, KC_RABK), // >
+    COMBO(ns_bi_hpl, KC_RABK), // >
+    COMBO(ns_bi_hpr, KC_RABK), // >
     COMBO(ns_hi_tp, KC_MINUS),
-    COMBO(ns_ti_hp, KC_UNDERSCORE),
+    COMBO(ns_ti_hpl, KC_UNDERSCORE),
+    COMBO(ns_ti_hpr, KC_UNDERSCORE),
     COMBO(ns_hi_tr, KC_SLASH),
     COMBO(ns_ti_hr, KC_BACKSLASH),
     COMBO(ns_hi_tm, KC_DOT),
     COMBO(ns_tm_hr, KC_COMMA),
-    COMBO(ns_hr_hp, KC_DQT),
+    COMBO(ns_hr_hpl, KC_DQT),
+    COMBO(ns_hr_hpr, KC_DQT),
     COMBO(ns_tr_tp, KC_PERCENT),
     COMBO(ns_hi_hm_hr, KC_QUESTION),
     COMBO(ns_ti_tm_tr, KC_EXCLAIM),
@@ -365,7 +374,8 @@ combo_t key_combos[] = {
     COMBO(ns_hi_tm_tr, KC_COLON),
     COMBO(ns_hi_hm_tr, KC_AMPERSAND),
     COMBO(ns_ti_tm_hr, KC_PIPE),
-    COMBO(ns_hm_hr_hp, KC_GRAVE),
+    COMBO(ns_hm_hr_hpl, KC_GRAVE),
+    COMBO(ns_hm_hr_hpr, KC_GRAVE),
     COMBO(ns_tm_tr_tp, KC_TILDE),
     COMBO(ns_bi_bm, KC_HASH),
     COMBO(ns_bi_bm_hr, KC_DOLLAR),
@@ -488,7 +498,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NUMSYM] = LAYOUT_split_3x5_3(
               NS_TP,   NS_TR,   NS_TM,   NS_TI, _______, /*||*/ _______,   NS_TI,   NS_TM,   NS_TR,   NS_TP,
-              NS_HP,   NS_HR,   NS_HM,   NS_HI,   NS_SI, /*||*/   NS_SI,   NS_HI,   NS_HM,   NS_HR,   NS_HP,
+             NS_HPL,   NS_HR,   NS_HM,   NS_HI,   NS_SI, /*||*/   NS_SI,   NS_HI,   NS_HM,   NS_HR,  NS_HPR,
             _______, _______,   NS_BM,   NS_BI, _______, /*||*/ _______,   NS_BI,   NS_BM, _______, _______,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
