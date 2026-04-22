@@ -329,11 +329,11 @@ combo_t key_combos[] = {
     COMBO(al_ti_hm, KC_X),
     // -----------------------------------------------
     COMBO(al_hi_hm_hr, KC_SPACE),
-    COMBO(al_ti_tm_tr, KC_ESCAPE),
-    COMBO(al_hi_tm_hr, OSL(_NUMSYM)),
-    COMBO(al_ti_hm_hr, OSL(_FUNCT)),
-    COMBO(al_hi_tm_tr, OSL(_GO)),
-    COMBO(al_hi_hm_tr, OSL(_MEDIA)),
+    COMBO(al_ti_tm_tr, OSL(_GO)),
+    COMBO(al_hi_tm_hr, OSL(_MEDIA)),
+    COMBO(al_ti_tm_hr, OSL(_FUNCT)),
+    COMBO(al_hi_tm_tr, OSL(_NUMSYM)),
+    COMBO(al_hi_hm_tr, CW_TOGG),
     // COMBO(???, OSL(_MOUSE)),
     COMBO(al_bi_bm, OSM(MOD_LGUI)),
     COMBO(al_bi_hr, OSM(MOD_LCTL)),
@@ -476,7 +476,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        case ALT_GRV: // same app
+        case ALT_GRV: // ALT+`
             if (record->event.pressed) {
                 register_code(KC_LALT);
                 tap_code(KC_GRAVE);
@@ -527,7 +527,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MEDIA] = LAYOUT_split_3x5_3(
             KC_BRIU, KC_MPRV, KC_VOLU, KC_MUTE, _______, /*||*/ _______, KC_MUTE, KC_VOLU, KC_MPRV, KC_BRIU,
             KC_BRID, KC_MNXT, KC_VOLD, KC_MPLY, _______, /*||*/ _______, KC_MPLY, KC_VOLD, KC_MNXT, KC_BRID,
-            _______, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+            QK_BOOT, _______, _______, _______, _______, /*||*/ _______, _______, _______, _______, QK_BOOT,
                               _______, _______, _______, /*||*/ _______, _______, _______
     ),
 
