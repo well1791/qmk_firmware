@@ -1,0 +1,188 @@
+// ==============================================================
+// Nums & Syms module  —  included 3x by keymap.c (arrays / entries / layer)
+// ==============================================================
+// Contains :
+//   - combo key arrays  : ns_* + ns_bi_*
+//   - combo entries     : digits, brackets, punctuation
+//   - layer             : [_NUMSYM]
+// Needs    : keymap_keycodes.h (NS_*)
+// Note     : si+hpl/hpr combos have LT() members; holding the
+//            pinky may add combo-term latency to its tap action
+//            (same class as the existing hi+hpl [ combos).
+// Provides : number/symbol layer
+// ==============================================================
+#if defined(KMB_COMBO_ARRAYS)
+// ===========================================================
+// ==================  Nums n Syms  ==========================
+// ===========================================================
+//                     | | | | |    | | | | |
+//                     | |*|*| |    | |*|*| |
+const uint16_t PROGMEM ns_hm_hr[] = {NS_HM, NS_HR, COMBO_END};
+//                     | | | | |    | | | | |
+//                     | |*| |*|    |*| |*| |
+const uint16_t PROGMEM ns_hi_hr[] = {NS_HI, NS_HR, COMBO_END};
+//                     | | | | |    | | | | |
+//                     | | |*|*|    |*|*| | |
+const uint16_t PROGMEM ns_hi_hm[] = {NS_HI, NS_HM, COMBO_END};
+//                     | | | | |    | | | | |
+//                     |*| | |*|    |*| | |*|
+const uint16_t PROGMEM ns_hi_hpl[] = {NS_HI, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_hi_hpr[] = {NS_HI, NS_HPR, COMBO_END};
+// ----------------------------------------------------------
+//                     | |*| | |    | | |*| |
+//                     | | | |*|    |*| | | |
+const uint16_t PROGMEM ns_hi_tr[] = {NS_HI, NS_TR, COMBO_END};
+//                     | | |*| |    | |*| | |
+//                     | | | |*|    |*| | | |
+const uint16_t PROGMEM ns_hi_tm[] = {NS_HI, NS_TM, COMBO_END};
+//                     |*| | | |    | | | |*|
+//                     | | | |*|    |*| | | |
+const uint16_t PROGMEM ns_hi_tp[] = {NS_HI, NS_TP, COMBO_END};
+//                     | |*| | |    | | |*| |
+//                     | | |*| |    | |*| | |
+const uint16_t PROGMEM ns_hm_tr[] = {NS_HM, NS_TR, COMBO_END};
+// -----------------------------------------------------------
+//                     | |*|*| |    | |*|*| |
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_tm_tr[] = {NS_TM, NS_TR, COMBO_END};
+//                     | |*| |*|    |*| |*| |
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_ti_tr[] = {NS_TI, NS_TR, COMBO_END};
+//                     | | |*|*|    |*|*| | |
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_ti_tm[] = {NS_TI, NS_TM, COMBO_END};
+//                      |*| | |*|   |*| | |*|
+//                      | | | | |   | | | | |
+const uint16_t PROGMEM ns_ti_tp[] = {NS_TI, NS_TP, COMBO_END};
+// -----------------------------------------------------------
+//                     | | |*| |    | |*| | |
+//                     | |*| | |    | | |*| |
+const uint16_t PROGMEM ns_tm_hr[] = {NS_TM, NS_HR, COMBO_END};
+//                     | | | |*|    |*| | | |
+//                     | |*| | |    | | |*| |
+const uint16_t PROGMEM ns_ti_hr[] = {NS_TI, NS_HR, COMBO_END};
+//                     | | | |*|    |*| | | |
+//                     |*| | | |    | | | |*|
+const uint16_t PROGMEM ns_ti_hpl[] = {NS_TI, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_ti_hpr[] = {NS_TI, NS_HPR, COMBO_END};
+//                     |*| | | |    | | | |*|
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_si_tr[] = {NS_SI, NS_TR, COMBO_END};
+const uint16_t PROGMEM ns_si_hr[] = {NS_SI, NS_HR, COMBO_END};
+//                     |*| | | |    | | | |*|
+//                     |*| | | |    | | | |*|
+const uint16_t PROGMEM ns_si_hpl[] = {NS_SI, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_si_hpr[] = {NS_SI, NS_HPR, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |    | | | | |
+//                     |*|*| | |    | | |*|*|
+const uint16_t PROGMEM ns_hr_hpl[] = {NS_HR, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_hr_hpr[] = {NS_HR, NS_HPR, COMBO_END};
+//                     |*|*| | |    | | |*|*|
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM ns_tr_tp[] = {NS_TR, NS_TP, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     | |*|*|*|       |*|*|*| |
+const uint16_t PROGMEM ns_hi_hm_hr[] = {NS_HI, NS_HM, NS_HR, COMBO_END};
+//                     | | |*| |       | |*| | |
+//                     | |*| |*|       |*| |*| |
+const uint16_t PROGMEM ns_hi_tm_hr[] = {NS_HI, NS_TM, NS_HR, COMBO_END};
+//                     | |*|*| |       | |*|*| |
+//                     | | | |*|       |*| | | |
+const uint16_t PROGMEM ns_hi_tm_tr[] = {NS_HI, NS_TM, NS_TR, COMBO_END};
+//                     | |*| | |       | | |*| |
+//                     | | |*|*|       |*|*| | |
+const uint16_t PROGMEM ns_hi_hm_tr[] = {NS_HI, NS_HM, NS_TR, COMBO_END};
+//                     | | |*|*|       |*|*| | |
+//                     | |*| | |       | | |*| |
+const uint16_t PROGMEM ns_ti_tm_hr[] = {NS_TI, NS_TM, NS_HR, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     | |*|*| |       | |*|*| |
+//                         |*|         |*|
+const uint16_t PROGMEM ns_bi_hm_hr[] = {NS_BI, NS_HM, NS_HR, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     | | |*| |       | |*| | |
+//                         | |*|       |*| |
+const uint16_t PROGMEM ns_bi_hm[] = {NS_BI, NS_HM, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         |*| |       | |*|
+const uint16_t PROGMEM ns_bm_hr[] = {NS_BM, NS_HR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         | |*|       |*| |
+const uint16_t PROGMEM ns_bi_hr[] = {NS_BI, NS_HR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     |*| | | |       | | | |*|
+//                         | |*|       |*| |
+const uint16_t PROGMEM ns_bi_hpl[] = {NS_BI, NS_HPL, COMBO_END};
+const uint16_t PROGMEM ns_bi_hpr[] = {NS_BI, NS_HPR, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | | | | |       | | | | |
+//                         |*|*|       |*|*|
+const uint16_t PROGMEM ns_bi_bm[] = {NS_BI, NS_BM, COMBO_END};
+//                     | | | | |       | | | | |
+//                     | |*| | |       | | |*| |
+//                         |*|*|       |*|*|
+const uint16_t PROGMEM ns_bi_bm_hr[] = {NS_BI, NS_BM, NS_HR, COMBO_END};
+
+#elif defined(KMB_COMBO_ENTRIES)
+    // ===========================================================
+    // ==================  Nums N Syms  ==========================
+    // ===========================================================
+    // digits
+    COMBO(ns_hi_hm, KC_2),
+    COMBO(ns_hm_hr, KC_4),
+    COMBO(ns_ti_tm, KC_7),
+    COMBO(ns_tm_tr, KC_9),
+    COMBO(ns_hi_hm_hr, KC_SPACE),
+    // pairs <>
+    COMBO(ns_hi_hr, KC_LABK),
+    COMBO(ns_ti_tr, KC_RABK),
+    // pairs ()
+    COMBO(ns_hi_tr, KC_LPRN),
+    COMBO(ns_ti_hr, KC_RPRN),
+    // pairs []
+    COMBO(ns_hi_hpl, KC_LBRC),
+    COMBO(ns_hi_hpr, KC_LBRC),
+    COMBO(ns_ti_tp, KC_RBRC),
+    // pairs {}
+    COMBO(ns_hi_tp, KC_LCBR),
+    COMBO(ns_ti_hpl, KC_RCBR),
+    COMBO(ns_ti_hpr, KC_RCBR),
+    // symbols
+    COMBO(ns_hi_tm, KC_SLASH),
+    COMBO(ns_tm_hr, KC_DOT),
+    COMBO(ns_hm_tr, KC_UNDERSCORE),
+    COMBO(ns_bi_hm, KC_DQT),
+    COMBO(ns_bi_hr, KC_MINUS),
+    COMBO(ns_bi_hpl, KC_ASTERISK),
+    COMBO(ns_bi_hpr, KC_ASTERISK),
+    COMBO(ns_hr_hpl, KC_BACKSLASH),
+    COMBO(ns_hr_hpr, KC_BACKSLASH),
+    COMBO(ns_si_tr, KC_PLUS),
+    COMBO(ns_si_hr, KC_EXLM),
+    COMBO(ns_si_hpl, KC_AT),
+    COMBO(ns_si_hpr, KC_AT),
+    COMBO(ns_bm_hr, KC_EQUAL),
+    // triples
+    COMBO(ns_hi_tm_hr, KC_SEMICOLON),
+    COMBO(ns_hi_tm_tr, KC_COLON),
+    COMBO(ns_hi_hm_tr, KC_AMPERSAND),
+    COMBO(ns_ti_tm_hr, KC_PIPE),
+    COMBO(ns_bi_hm_hr, KC_DOLLAR),
+    COMBO(ns_bi_bm_hr, KC_PERCENT),
+    COMBO(ns_bi_bm, KC_HASH),
+    COMBO(ns_tr_tp, KC_CIRCUMFLEX),
+
+#elif defined(KMB_LAYER)
+    [_NUMSYM] = LAYOUT_split_3x5_3(
+              NS_TP,   NS_TR,   NS_TM,   NS_TI, _______, /*||*/ _______,   NS_TI,   NS_TM,   NS_TR,   NS_TP,
+             NS_HPL,   NS_HR,   NS_HM,   NS_HI,   NS_SI, /*||*/   NS_SI,   NS_HI,   NS_HM,   NS_HR,  NS_HPR,
+            _______, _______,   NS_BM,   NS_BI, _______, /*||*/ _______,   NS_BI,   NS_BM, _______, _______,
+                              _______, _______, _______, /*||*/ _______, _______, _______
+    ),
+#endif

@@ -1,0 +1,33 @@
+// ==============================================================
+// Mods module  —  included 3x by keymap.c (arrays / entries / layer)
+// ==============================================================
+// Contains : layer [_MODS] + one-shot combo-mod chords.
+// PARITY-ONLY / UNREACHABLE: kanata's _mods.kbd is WIP and its
+// trigger (os_mods) is wired to no chord there either. Do not
+// reference _MODS from any reachable layer without adding a
+// trigger chord on the kanata side first.
+// Positions mirror kanata L_MODS: ti=GUI tm=TAB tr=ALT (top),
+// hi=SFT hm=ESC hr=CTL (home).
+// ==============================================================
+#if defined(KMB_COMBO_ARRAYS)
+const uint16_t PROGMEM md_ti_tr[]    = {OSM(MOD_LGUI), OSM(MOD_LALT), COMBO_END};
+const uint16_t PROGMEM md_hi_hr[]    = {OSM(MOD_LSFT), OSM(MOD_LCTL), COMBO_END};
+const uint16_t PROGMEM md_hi_tr[]    = {OSM(MOD_LSFT), OSM(MOD_LALT), COMBO_END};
+const uint16_t PROGMEM md_ti_hr[]    = {OSM(MOD_LGUI), OSM(MOD_LCTL), COMBO_END};
+const uint16_t PROGMEM md_hi_hm_hr[] = {OSM(MOD_LSFT), KC_ESC, OSM(MOD_LCTL), COMBO_END};
+
+#elif defined(KMB_COMBO_ENTRIES)
+    COMBO(md_ti_tr, OSM(MOD_LGUI | MOD_LALT)),  // sup+alt
+    COMBO(md_hi_hr, OSM(MOD_LCTL | MOD_LSFT)),  // ctl+sft
+    COMBO(md_hi_tr, OSM(MOD_LALT | MOD_LSFT)),  // alt+sft
+    COMBO(md_ti_hr, OSM(MOD_LGUI | MOD_LCTL)),  // sup+ctl
+    COMBO(md_hi_hm_hr, OSM(MOD_MEH)),           // meh
+
+#elif defined(KMB_LAYER)
+    [_MODS] = LAYOUT_split_3x5_3(
+            _______, OSM(MOD_LALT),   KC_TAB, OSM(MOD_LGUI), _______, /*||*/ _______, OSM(MOD_LGUI),   KC_TAB, OSM(MOD_LALT), _______,
+            _______, OSM(MOD_LCTL),   KC_ESC, OSM(MOD_LSFT), _______, /*||*/ _______, OSM(MOD_LSFT),   KC_ESC, OSM(MOD_LCTL), _______,
+            _______,    _______,     _______,    _______,     _______, /*||*/ _______,    _______,     _______,    _______,     _______,
+                                _______,      _______,      _______, /*||*/ _______,      _______,      _______
+    ),
+#endif

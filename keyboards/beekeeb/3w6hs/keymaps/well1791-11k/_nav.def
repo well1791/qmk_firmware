@@ -1,0 +1,59 @@
+// ==============================================================
+// Navigation module  —  included 3x by keymap.c (arrays / entries / layer)
+// ==============================================================
+// Contains :
+//   - combo key arrays  : na_* (NA_MV_* based)
+//   - combo entries     : end / home / del / esc / space
+//   - layers            : [_NAV_L], [_NAV_R] with cpy/pst/undo
+//                         (C-c/C-v/C-z) and pgup/pgdn per kanata
+//                         _nav.kbd; pinky-home = tap enter / hold shift.
+//                         Undo (C-z) sits on the MOVEMENT side SI
+//                         (kanata mov_si); nav side SI is XX -> KC_NO.
+// Needs    : keymap_keycodes.h (NA_MV_*, NA_MD_*)
+// Provides : left/right navigation layers
+// ==============================================================
+#if defined(KMB_COMBO_ARRAYS)
+// ===========================================================
+// ==================  Navigation   ==========================
+// ===========================================================
+//           | | | | |             | | | | |
+//           | |*| |*|             |*| |*| |
+const uint16_t PROGMEM na_hi_hr[]  = {NA_MV_LT, NA_MV_RT, COMBO_END};
+//           | |*| |*|             |*| |*| |
+//           | | | | |             | | | | |
+const uint16_t PROGMEM na_ti_tr[] = {NA_MV_TI, NA_MV_TR, COMBO_END};
+//           | |*|*| |             | |*|*| |
+//           | | | | |             | | | | |
+const uint16_t PROGMEM na_tm_tr[]  = {NA_MV_TM, NA_MV_TR, COMBO_END};
+//           | | | | |             | | | | |
+//           | |*|*|*|             |*|*|*| |
+const uint16_t PROGMEM na_hi_hm_hr[]  = {NA_MV_LT, NA_MV_HM,  NA_MV_RT, COMBO_END};
+//           | |*|*|*|             |*|*|*| |
+//           | | | | |             | | | | |
+const uint16_t PROGMEM na_ti_tm_tr[]  = {NA_MV_TI, NA_MV_TM, NA_MV_TR, COMBO_END};
+
+#elif defined(KMB_COMBO_ENTRIES)
+    // ===========================================================
+    // ==================  Navigation   ==========================
+    // ===========================================================
+    COMBO(na_hi_hr, KC_END),
+    COMBO(na_ti_tr, KC_HOME),
+    COMBO(na_tm_tr, KC_DELETE),
+    COMBO(na_ti_tm_tr, KC_ESCAPE),
+    COMBO(na_hi_hm_hr, KC_SPACE),
+
+#elif defined(KMB_LAYER)
+    [_NAV_L] = LAYOUT_split_3x5_3(
+        NA_MV_TP, NA_MV_TR, NA_MV_TM, NA_MV_TI, _______, /*||*/ _______, NA_MD_TI, NA_MD_TM, NA_MD_TR, TO(_NAV_R),
+        NA_MV_HP, NA_MV_LT, NA_MV_HM, NA_MV_RT, KC_NO, /*||*/ LCTL(KC_Z), NA_MD_HI, NA_MD_HM, NA_MD_HR, NA_MD_HP,
+        _______, _______, KC_PGDN, KC_PGUP, _______, /*||*/ LCTL(KC_V), LCTL(KC_C), _______, _______, _______,
+                            _______, _______, _______, /*||*/ _______, _______, _______
+    ),
+
+    [_NAV_R] = LAYOUT_split_3x5_3(
+      TO(_NAV_L), NA_MD_TR, NA_MD_TM, NA_MD_TI, _______, /*||*/ _______, NA_MV_TI, NA_MV_TM, NA_MV_TR, NA_MV_TP,
+        NA_MD_HP, NA_MD_HR, NA_MD_HM, NA_MD_HI, LCTL(KC_Z), /*||*/ KC_NO, NA_MV_LT, NA_MV_HM, NA_MV_RT, NA_MV_HP,
+         _______, _______, LCTL(KC_C), LCTL(KC_V), _______, /*||*/ KC_PGUP, KC_PGDN, _______, _______, _______,
+                              _______, _______, _______, /*||*/ _______, _______, _______
+    ),
+#endif

@@ -1,0 +1,46 @@
+// ==============================================================
+// Functional module  —  included 3x by keymap.c (arrays / entries / layer)
+// ==============================================================
+// Contains :
+//   - combo key arrays  : ff_f2 / ff_f4 / ff_f7 / ff_f9
+//   - combo entries     : KC_F2/F4/F7/F9
+//   - layer             : [_FUNCT] (F12 top pinky / F11 home pinky, per kanata _ff.kbd)
+//                         SI and bottom index/middle are KC_NO (kanata XX)
+//                         so alpha chords can't leak through transparency.
+// Needs    : QMK keycodes (KC_F1..KC_F12)
+// Provides : function-key layer
+// ==============================================================
+#if defined(KMB_COMBO_ARRAYS)
+// ===========================================================
+// ==================  Functional   ==========================
+// ===========================================================
+//           | | | | |           | | | | |
+//           | | |*|*|           |*|*| | |
+const uint16_t PROGMEM ff_f2[] = {KC_F1, KC_F3, COMBO_END};
+//           | | | | |           | | | | |
+//           | |*|*| |           | |*|*| |
+const uint16_t PROGMEM ff_f4[] = {KC_F3, KC_F5, COMBO_END};
+//           | | |*|*|           |*|*| | |
+//           | | | | |           | | | | |
+const uint16_t PROGMEM ff_f7[] = {KC_F6, KC_F8, COMBO_END};
+//           | |*|*| |           | |*|*| |
+//           | | | | |           | | | | |
+const uint16_t PROGMEM ff_f9[] = {KC_F8, KC_F10, COMBO_END};
+
+#elif defined(KMB_COMBO_ENTRIES)
+    // ===========================================================
+    // ==================  Functional   ==========================
+    // ===========================================================
+    COMBO(ff_f2, KC_F2),
+    COMBO(ff_f4, KC_F4),
+    COMBO(ff_f7, KC_F7),
+    COMBO(ff_f9, KC_F9),
+
+#elif defined(KMB_LAYER)
+    [_FUNCT] = LAYOUT_split_3x5_3(
+             KC_F12,  KC_F10,   KC_F8,   KC_F6, _______, /*||*/ _______,   KC_F6,   KC_F8,  KC_F10,  KC_F12,
+             KC_F11,   KC_F5,   KC_F3,   KC_F1,    KC_NO, /*||*/    KC_NO,   KC_F1,   KC_F3,   KC_F5,  KC_F11,
+            _______, _______,    KC_NO,    KC_NO, _______, /*||*/ _______,   KC_NO,    KC_NO, _______, _______,
+                              _______, _______, _______, /*||*/ _______, _______, _______
+    ),
+#endif

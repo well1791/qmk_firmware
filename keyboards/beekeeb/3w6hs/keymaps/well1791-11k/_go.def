@@ -1,0 +1,15 @@
+// ==============================================================
+// Go-to shortcuts module  —  included 3x by keymap.c (layer only)
+// ==============================================================
+// Contains : layer [_GO]
+//            Bottom index/middle are KC_NO (kanata go_bi/go_bm XX).
+// Needs    : nothing (built-in quantum keycodes only)
+// ==============================================================
+#if defined(KMB_LAYER)
+    [_GO] = LAYOUT_split_3x5_3(
+     LALT(KC_1), LALT(KC_GRV), LCTL(KC_PGUP), LCTL(LSFT(KC_T)), LAG(KC_I), /*||*/ LAG(KC_I), LCTL(LSFT(KC_T)), LCTL(KC_PGUP), LALT(KC_GRV), LALT(KC_1),
+     LALT(KC_9), LCTL(KC_TAB), LCTL(KC_PGDN),          LCTL(KC_W), _______, /*||*/ _______,          LCTL(KC_W), LCTL(KC_PGDN), LCTL(KC_TAB), LALT(KC_9),
+      _______,    _______,       KC_NO,         KC_NO,   _______, /*||*/ _______,      KC_NO,       KC_NO,       _______,    _______,
+                                  _______,    _______,   _______, /*||*/ _______,    _______,   _______
+    ),
+#endif

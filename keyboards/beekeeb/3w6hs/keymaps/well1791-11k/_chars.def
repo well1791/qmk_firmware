@@ -1,0 +1,17 @@
+// ==============================================================
+// Chars module  —  included by keymap.c (layer only)
+// ==============================================================
+// Contains : layer [_CHARS] — accented chars via host compose
+//            (RALT tap + mark + letter; needs compose-on-RALT
+//            on the host OS, same as kanata L_CHARS)
+// Reached  : OSL(_CHARS) from the alpha K+A combo (al_bm_hr)
+// Needs    : keymap_keycodes.h (CHR_*)
+// ==============================================================
+#if defined(KMB_LAYER)
+    [_CHARS] = LAYOUT_split_3x5_3(
+            _______, _______,   CHR_E, _______, _______, /*||*/ _______,   CHR_U,   CHR_I,   CHR_O, _______,
+              CHR_A, _______,   CHR_D, _______, _______, /*||*/ _______, _______, _______, _______, _______,
+            _______, _______, _______, _______, _______, /*||*/ _______,   CHR_N, _______, _______, _______,
+                              _______, _______, _______, /*||*/ _______, _______, _______
+    ),
+#endif
