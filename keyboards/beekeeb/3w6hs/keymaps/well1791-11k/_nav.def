@@ -25,6 +25,12 @@ const uint16_t PROGMEM na_ti_tr[] = {NA_MV_TI, NA_MV_TR, COMBO_END};
 //           | |*|*| |             | |*|*| |
 //           | | | | |             | | | | |
 const uint16_t PROGMEM na_tm_tr[]  = {NA_MV_TM, NA_MV_TR, COMBO_END};
+//           | | |*|*|             |*|*| | |
+//           | | | | |             | | | | |
+const uint16_t PROGMEM na_ti_tm[]  = {NA_MV_TI, NA_MV_TM, COMBO_END};
+//           | |*| | |             | | |*| |
+//           | | |*| |             | |*| | |
+const uint16_t PROGMEM na_hm_tr[]  = {NA_MV_HM, NA_MV_TR, COMBO_END};
 //           | | | | |             | | | | |
 //           | |*|*|*|             |*|*|*| |
 const uint16_t PROGMEM na_hi_hm_hr[]  = {NA_MV_LT, NA_MV_HM,  NA_MV_RT, COMBO_END};
@@ -38,22 +44,23 @@ const uint16_t PROGMEM na_ti_tm_tr[]  = {NA_MV_TI, NA_MV_TM, NA_MV_TR, COMBO_END
     // ===========================================================
     COMBO(na_hi_hr, KC_END),
     COMBO(na_ti_tr, KC_HOME),
-    COMBO(na_tm_tr, KC_DELETE),
+    COMBO(na_tm_tr, KC_PGUP),
+    COMBO(na_hm_tr, KC_PGDN),
     COMBO(na_ti_tm_tr, KC_ESCAPE),
     COMBO(na_hi_hm_hr, KC_SPACE),
 
 #elif defined(KMB_LAYER)
     [_NAV_L] = LAYOUT_split_3x5_3(
-        NA_MV_TP, NA_MV_TR, NA_MV_TM, NA_MV_TI, _______, /*||*/ _______, NA_MD_TI, NA_MD_TM, NA_MD_TR, TO(_NAV_R),
-        NA_MV_HP, NA_MV_LT, NA_MV_HM, NA_MV_RT, KC_NO, /*||*/ LCTL(KC_Z), NA_MD_HI, NA_MD_HM, NA_MD_HR, NA_MD_HP,
-        _______, _______, KC_PGDN, KC_PGUP, _______, /*||*/ LCTL(KC_V), LCTL(KC_C), _______, _______, _______,
-                            _______, _______, _______, /*||*/ _______, _______, _______
+      NA_MV_TP, NA_MV_TR, NA_MV_TM, NA_MV_TI,  _______, /*||*/  _______, NA_MD_TI, NA_MD_TM, NA_MD_TR, TO(_NAV_R),
+      NA_MV_HP, NA_MV_LT, NA_MV_HM, NA_MV_RT, NA_MV_SI, /*||*/ NA_MD_SI, NA_MD_HI, NA_MD_HM, NA_MD_HR,   NA_MD_HP,
+       _______,  _______, NA_MV_BM, NA_MV_BI,  _______, /*||*/  _______, NA_MD_BI, NA_MD_BM,  _______,    _______,
+                             _______, _______, _______, /*||*/  _______, _______, _______
     ),
 
     [_NAV_R] = LAYOUT_split_3x5_3(
-      TO(_NAV_L), NA_MD_TR, NA_MD_TM, NA_MD_TI, _______, /*||*/ _______, NA_MV_TI, NA_MV_TM, NA_MV_TR, NA_MV_TP,
-        NA_MD_HP, NA_MD_HR, NA_MD_HM, NA_MD_HI, LCTL(KC_Z), /*||*/ KC_NO, NA_MV_LT, NA_MV_HM, NA_MV_RT, NA_MV_HP,
-         _______, _______, LCTL(KC_C), LCTL(KC_V), _______, /*||*/ KC_PGUP, KC_PGDN, _______, _______, _______,
-                              _______, _______, _______, /*||*/ _______, _______, _______
+      TO(_NAV_L), NA_MD_TR, NA_MD_TM, NA_MD_TI,  _______, /*||*/  _______, NA_MV_TI, NA_MV_TM, NA_MV_TR, NA_MV_TP,
+        NA_MD_HP, NA_MD_HR, NA_MD_HM, NA_MD_HI, NA_MD_SI, /*||*/ NA_MV_SI, NA_MV_LT, NA_MV_HM, NA_MV_RT, NA_MV_HP,
+         _______,  _______, NA_MD_BM, NA_MD_BI,  _______, /*||*/  _______, NA_MV_BI, NA_MV_BM,  _______,  _______,
+                             _______,  _______,  _______, /*||*/  _______,  _______,  _______
     ),
 #endif

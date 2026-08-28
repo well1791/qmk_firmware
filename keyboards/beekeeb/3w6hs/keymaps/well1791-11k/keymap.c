@@ -20,7 +20,7 @@
 enum layers {
     _ALPHA = 0,
     _NUMSYM, // Numbers and Symbols
-    _FUNCT, // Functional
+    _FUNCT, // F1-F12
     _NAV_L,
     _NAV_R,
     _MEDIA,

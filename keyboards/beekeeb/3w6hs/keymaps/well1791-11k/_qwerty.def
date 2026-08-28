@@ -14,9 +14,9 @@ const uint16_t PROGMEM qw_gh[] = {QW_G, QW_H, COMBO_END};
 
 #elif defined(KMB_LAYER)
     [_QWERTY] = LAYOUT_split_3x5_3(
-                     QW_Q, QW_W, QW_E, QW_R,    QW_T, /*||*/    QW_Y, QW_U,     QW_I,   QW_O,          QW_P,
-                     QW_A, QW_S, QW_D, QW_F,    QW_G, /*||*/    QW_H, QW_J,     QW_K,   QW_L, KC_SEMICOLON,
-                     QW_Z, QW_X, QW_C, QW_V,    QW_B, /*||*/    QW_N, QW_M, KC_COMMA, KC_DOT,     KC_SLASH,
-                          _______, _______, _______, /*||*/ _______, _______, _______
+          QW_Q, QW_W, QW_E, QW_R,    QW_T, /*||*/    QW_Y,    QW_U,     QW_I,   QW_O,     QW_P,
+        QW_HPL, QW_S, QW_D, QW_F,    QW_G, /*||*/    QW_H,    QW_J,     QW_K,   QW_L,   QW_HPR,
+          QW_Z, QW_X, QW_C, QW_V,    QW_B, /*||*/    QW_N,    QW_M, KC_COMMA, KC_DOT, KC_SLASH,
+        _______, _______,  LSFT_T(KC_ESC), /*||*/ LSFT_T(KC_SPC), _______,  _______
     ),
 #endif

@@ -60,14 +60,21 @@ const uint16_t PROGMEM al_tm_hr[] = {AL_TM, AL_HR, COMBO_END};
 //                     | |*| | |    | | |*| |
 const uint16_t PROGMEM al_ti_hr[] = {AL_TI, AL_HR, COMBO_END};
 //                     | | | |*|    |*| | | |
-//                     | | |*| |    | |*| | |
-const uint16_t PROGMEM al_ti_hm[] = {AL_TI, AL_HM, COMBO_END};
-//                     | | | |*|    |*| | | |
 //                     |*| | | |    | | | |*|
 const uint16_t PROGMEM al_ti_hp_l[] = {AL_TI, AL_HPL, COMBO_END};
 const uint16_t PROGMEM al_ti_hp_r[] = {AL_TI, AL_HPR, COMBO_END};
-//                     |*| | | |       | | | |*|   (g + h)
-const uint16_t PROGMEM al_si_sir[] = {AL_SI, AL_SIR, COMBO_END};
+// -----------------------------------------------------------
+//                     |*|*| | |    | | |*|*|
+//                     | | | | |    | | | | |
+const uint16_t PROGMEM al_tr_tp[] = {AL_TR, AL_TP, COMBO_END};
+//                     | | | | |    | | | | |
+//                     |*|*| | |    | | |*|*|
+const uint16_t PROGMEM al_hr_hp_l[] = {AL_HR, AL_HPL, COMBO_END};
+const uint16_t PROGMEM al_hr_hp_r[] = {AL_HR, AL_HPR, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |    | | | | |
+//                     | | | | |*||*| | | | |
+const uint16_t PROGMEM al_sil_sir[] = {AL_SIL, AL_SIR, COMBO_END};
 // -----------------------------------------------------------
 //                     | | | | |       | | | | |
 //                     | |*|*|*|       |*|*|*| |
@@ -90,6 +97,14 @@ const uint16_t PROGMEM al_ti_tm_hr[] = {AL_TI, AL_TM, AL_HR, COMBO_END};
 //                     | | | |*|       |*| | | |
 //                     | |*|*| |       | |*|*| |
 const uint16_t PROGMEM al_ti_hm_hr[] = {AL_TI, AL_HM, AL_HR, COMBO_END};
+// -----------------------------------------------------------
+//                     | | | | |       | | | | |
+//                     |*|*|*| |       | |*|*|*|
+const uint16_t PROGMEM al_hm_hr_hp_l[] = {AL_HR, AL_HM, AL_HPL, COMBO_END};
+const uint16_t PROGMEM al_hm_hr_hp_r[] = {AL_HR, AL_HM, AL_HPR, COMBO_END};
+//                     |*|*|*| |       | |*|*|*|
+//                     | | | | |       | | | | |
+const uint16_t PROGMEM al_tm_tr_tp[] = {AL_TR, AL_TM, AL_TP, COMBO_END};
 // -----------------------------------------------------------
 //                     | | | | |          | | | | |
 //                     |*|*|*|*|          |*|*|*|*|
@@ -141,17 +156,21 @@ const uint16_t PROGMEM al_bi_hm_hr[] = {AL_BI, AL_HM, AL_HR, COMBO_END};
     COMBO(al_hi_tp, KC_Y),
     COMBO(al_ti_tp, KC_B),
     COMBO(al_tm_hr, KC_F),
-    COMBO(al_hm_tr, KC_V),
+    COMBO(al_hm_tr, KC_Q),
     COMBO(al_hi_tm, KC_W),
-    COMBO(al_ti_hr, KC_Q),
-    COMBO(al_ti_hm, KC_X),
+    COMBO(al_hr_hp_l, KC_X),
+    COMBO(al_hr_hp_r, KC_X),
+    COMBO(al_tr_tp, KC_Z),
     // -----------------------------------------------
     COMBO(al_hi_hm_hr, KC_SPACE),
     COMBO(al_ti_tm_tr, OSL(_GO)),
     COMBO(al_hi_tm_hr, OSL(_MEDIA)),
-    COMBO(al_ti_tm_hr, OSL(_FUNCT)),
+    COMBO(al_ti_tm_hr, KC_ENT),
     COMBO(al_hi_tm_tr, OSL(_NUMSYM)),
-    COMBO(al_hi_hm_tr, CW_TOGG),
+    COMBO(al_hi_hm_tr, KC_BSPC),
+    COMBO(al_hm_hr_hp_l, CW_TOGG),
+    COMBO(al_hm_hr_hp_r, CW_TOGG),
+    COMBO(al_tm_tr_tp, OSL(_FUNCT)),
     // COMBO(???, OSL(_MOUSE)),
     COMBO(al_bi_bm, OSM(MOD_LGUI)),
     COMBO(al_bi_hr, OSM(MOD_LCTL)),
@@ -160,13 +179,13 @@ const uint16_t PROGMEM al_bi_hm_hr[] = {AL_BI, AL_HM, AL_HR, COMBO_END};
     COMBO(al_bi_hp_r, OSM(MOD_LALT)),
     COMBO(al_bm_hr, OSL(_CHARS)),
     COMBO(al_bi_hm_hr, OSM(MOD_MEH)),
-    COMBO(al_si_sir, TO(_QWERTY)),
+    COMBO(al_sil_sir, TO(_QWERTY)),
 
 #elif defined(KMB_LAYER)
     [_ALPHA] = LAYOUT_split_3x5_3(
-              AL_TP,   AL_TR,   AL_TM,   AL_TI, _______, /*||*/ _______,   AL_TI,   AL_TM,   AL_TR,   AL_TP,
-             AL_HPL,   AL_HR,   AL_HM,   AL_HI,   AL_SI, /*||*/   AL_SIR,  AL_HI,   AL_HM,   AL_HR,  AL_HPR,
-            _______, _______,   AL_BM,   AL_BI, _______, /*||*/ _______,   AL_BI,   AL_BM, _______, _______,
-                       _______, _______, LSFT_T(KC_ESC), /*||*/ _______, _______, _______
+          AL_TP,   AL_TR,   AL_TM,   AL_TI, _______, /*||*/ _______,   AL_TI,   AL_TM,   AL_TR,   AL_TP,
+         AL_HPL,   AL_HR,   AL_HM,   AL_HI,  AL_SIL, /*||*/  AL_SIR,   AL_HI,   AL_HM,   AL_HR,  AL_HPR,
+        _______, _______,   AL_BM,   AL_BI, _______, /*||*/ _______,   AL_BI,   AL_BM, _______, _______,
+                          _______, _______, _______, /*||*/ _______, _______, _______
     ),
 #endif
