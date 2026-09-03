@@ -12,8 +12,11 @@
  */
 
 // ===== AL_ - Alpha =====
+// AL_SIL is a plain keycode; AL_SIR is a distinct custom keycode (enum
+// below) with the same tap, so the al_sil_sir chord can pair the two
+// side keys — the combo engine matches keys by keycode and cannot
+// distinguish two identical keycodes.
 #define AL_SIL KC_V
-#define AL_SIR KC_V
 #define AL_HI KC_E
 #define AL_HM KC_I
 #define AL_HR KC_A
@@ -77,9 +80,14 @@ enum custom_keycodes {
     CHR_U,              // ú
     CHR_N,              // ñ
     CHR_D,              // ü (kanata used the 'd' key for diaeresis)
+    // Right side-index: same tap as AL_SIL (v) but a distinct keycode
+    // so the al_sil_sir chord can pair the two side keys.
+    AL_SIR,
     // Namespaced qwerty letters: distinct keycodes so alpha combos
     // (plain KC_*) can't fire inside the gaming layer.
-    QW_Q, QW_W, QW_E, QW_R, QW_T, QW_Y, QW_U, QW_I, QW_O, QW_P,
-    QW_A, QW_S, QW_D, QW_F, QW_G, QW_H, QW_J, QW_K, QW_L,
-    QW_Z, QW_X, QW_C, QW_V, QW_B, QW_N, QW_M,
+    // Must stay alphabetical: process_record_user maps QW_A..QW_Z
+    // arithmetically via KC_A + (keycode - QW_A).
+    QW_A, QW_B, QW_C, QW_D, QW_E, QW_F, QW_G, QW_H, QW_I, QW_J, QW_K,
+    QW_L, QW_M, QW_N, QW_O, QW_P, QW_Q, QW_R, QW_S, QW_T, QW_U, QW_V,
+    QW_W, QW_X, QW_Y, QW_Z,
 };

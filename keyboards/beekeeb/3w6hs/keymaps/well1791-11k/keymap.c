@@ -95,7 +95,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) tap_code16(KC_A + (keycode - QW_A));
             return false;
         case AL_SIR:
-            if (record->event.pressed) tap_code(KC_Z);
+            if (record->event.pressed) tap_code(KC_V);
             return false;
         case CHR_A: compose_accent(record, KC_QUOTE, KC_A); return false;        // á
         case CHR_E: compose_accent(record, KC_QUOTE, KC_E); return false;        // é
