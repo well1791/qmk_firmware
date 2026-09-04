@@ -30,7 +30,7 @@
 #define AL_BM KC_K
 
 // ===== NS_ - Numbers and Symbols =====
-#define NS_SI KC_TILDE
+#define NS_SI KC_GRAVE
 #define NS_HI KC_1
 #define NS_HM KC_3
 #define NS_HR KC_5
@@ -40,7 +40,7 @@
 #define NS_TR KC_0
 #define NS_TP KC_COMMA
 #define NS_BI KC_QUESTION
-#define NS_BM KC_GRAVE
+#define NS_BM KC_TILDE
 
 // ===== NA_ - Navigation =====
 // ----- MV_ - Movement
